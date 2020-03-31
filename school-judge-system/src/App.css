@@ -1,6 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap');
+
 html, body, .app {
     height: 100vh;
     background-color: #eee;
+    font-family: 'Montserrat', sans-serif;
 }
 
 .bg-gray {
@@ -52,7 +55,10 @@ html, body, .app {
     background-image: url("./assets/images/studying.svg");
     height: 100vh;
 }
-
+.bg-image {
+    background-image: url("./assets/images/studying.svg");
+    height: 100vh;
+}
 .register-wrapper {
     background-image: url("./assets/images/exam.svg");
     height: 100vh;
@@ -77,4 +83,13 @@ html, body, .app {
 
 .role-select {
     width: 48%;
+}
+
+.side-bar {
+    width: 210px;
+    height: 92vh;
+}
+
+.sidebar-logo {
+    border-bottom: 2px solid white;
 }

@@ -13,6 +13,7 @@ import {setUser, clearUser} from './store/actions/user-actions';
 import Register from './components/auth/Register';
 import Login from './components/auth/Login';
 import Spinner from './components/common/Spinner';
+import AdminHome from "./components/admin/AdminHome";
 
 const store = createStore(rootReducer);
 
@@ -33,9 +34,9 @@ const Root = (props) => {
 
     return props.isLoading ? <Spinner/> : (
         <Switch>
-            <Route exact path="/" component={App}/>
             <Route path="/login" component={Login}/>
             <Route path="/register" component={Register}/>
+            <Route path="/" component={App}/>
         </Switch>
     )
 };

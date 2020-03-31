@@ -15,21 +15,31 @@ const Navigation = ({user}) => {
     return (
         <nav className="navbar navbar-expand-lg navbar-dark primary-color">
 
-            <a className="navbar-brand" href="#">School Judge</a>
+            <Link className="navbar-brand h1 font-weight-bold" to="/">School Judge</Link>
 
             <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav"
                     aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span className="navbar-toggler-icon"></span>
+                <span className="navbar-toggler-icon"/>
             </button>
 
             <div className="collapse navbar-collapse" id="basicExampleNav">
-
                 <ul className="navbar-nav mr-auto">
                     <li className="nav-item">
                         <Link className="nav-link" to="/">Начало</Link>
                     </li>
-                    <li className="nav-item">
-                        <Link className="nav-link" to="/administration">Администрация</Link>
+                    <li className="nav-item dropdown">
+                        <a className="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                           aria-haspopup="true" aria-expanded="false">Администрация</a>
+                        <div className="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
+                            <Link className="dropdown-item" to="/admin/tests/add">
+                                <i className="fas fa-plus-square mr-3"/>
+                                Добави тест
+                            </Link>
+                            <Link className="dropdown-item" to="#">
+                                <i className="fas fa-envelope-open-text mr-3"/>
+                                Мойте тестове
+                            </Link>
+                        </div>
                     </li>
                 </ul>
 
