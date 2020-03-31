@@ -1,6 +1,5 @@
 import React, {useEffect} from 'react';
 import ReactDOM from 'react-dom';
-import 'antd/dist/antd.css';
 import firebase from './firebase';
 import './index.css';
 import App from './App';

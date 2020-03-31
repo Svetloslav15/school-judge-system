@@ -1,19 +1,11 @@
 import React from 'react';
 import './App.css';
-import firebase from './firebase';
+import Navigation from './components/common/navigation/Navigation';
 
 function App() {
-    const handleSignout = () => {
-        firebase
-            .auth()
-            .signOut()
-            .then(() => {
-                console.log('Signed out!');
-            });
-    };
     return (
         <div className='app'>
-            <button onClick={handleSignout}>Sign Out</button>
+            <Navigation/>
         </div>
     );
 }
