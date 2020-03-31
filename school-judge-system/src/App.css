@@ -90,7 +90,7 @@ html, body, .app {
     height: 100vh;
 }
 .p-form {
-    padding: 4em 0 2em 4em !important;
+    padding: 2em 4em !important;
 }
 .form-div {
     display: inline-block;
@@ -101,14 +101,25 @@ html, body, .app {
     border-radius: 5px;
     border: 4px solid white;
 }
-
-.role-message {
+.text-red {
     color: #F8383C;
+}
+.role-message {
+    color: #FFA000;
     text-align: left;
     font-style: italic;
     display: inline-block;
 }
 
 .role-select {
-    width: 86%;
+    width: 48%;
+}
+.d-inline-block {
+    display: inline-block;
+}
+.d-block {
+    display: block;
+}
+.d-none {
+    display: none;
 }

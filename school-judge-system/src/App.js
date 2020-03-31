@@ -1,13 +1,21 @@
 import React from 'react';
 import './App.css';
-import Test from './components/Test';
+import firebase from './firebase';
 
 function App() {
-  return (
-    <div className='app'>
-      <Test/>
-    </div>
-  );
+    const handleSignout = () => {
+        firebase
+            .auth()
+            .signOut()
+            .then(() => {
+                console.log('Signed out!');
+            });
+    };
+    return (
+        <div className='app'>
+            <button onClick={handleSignout}>Sign Out</button>
+        </div>
+    );
 }
 
 export default App;

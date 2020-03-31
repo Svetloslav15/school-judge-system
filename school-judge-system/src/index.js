@@ -48,13 +48,11 @@ const mapStateToProps = state => ({
 const RootWithAuth = withRouter(connect(mapStateToProps, {setUser, clearUser})(Root));
 
 ReactDOM.render(
-    <React.StrictMode>
-        <Provider store={store}>
-            <BrowserRouter>
-                <RootWithAuth/>
-            </BrowserRouter>
-        </Provider>
-    </React.StrictMode>,
+    <Provider store={store}>
+        <BrowserRouter>
+            <RootWithAuth/>
+        </BrowserRouter>
+    </Provider>,
     document.getElementById('root')
 );
 
