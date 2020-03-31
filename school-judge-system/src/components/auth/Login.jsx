@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {Link} from 'react-router-dom';
 import {Layout, Form, Input, Button, Typography} from 'antd';
+import { UserOutlined } from '@ant-design/icons';
 
 const Login = () => {
     return (
@@ -17,6 +18,7 @@ const Login = () => {
                     <Input
                         placeholder='Имейл'
                         type='email'
+                        prefix={<UserOutlined />}
                     />
                 </Form.Item>
                 <Form.Item
