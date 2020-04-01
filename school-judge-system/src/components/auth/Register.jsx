@@ -1,6 +1,5 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import {Link} from 'react-router-dom';
-import {Layout, Form, Input, Button, Typography, Row, Select} from 'antd';
 import {UserOutlined, MailOutlined} from '@ant-design/icons';
 import firebase from '../../firebase';
 
@@ -119,7 +118,7 @@ const Register = () => {
                                     <input onChange={(event) => setPassword(event.target.value)}
                                            value={password}
                                            type="password" className="form-control" id='password-input'/>
-                                    <label for="password-input">Парола</label>
+                                    <label htmlFor="password-input">Парола</label>
                                 </div>
 
                                 <div className="md-form col-md-6">

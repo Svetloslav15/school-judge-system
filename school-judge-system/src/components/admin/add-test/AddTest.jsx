@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import StepOneForm from './StepOneForm';
+import StepTwoForm from './StepTwoForm';
 
 const AddTest = (props) => {
     const [questions, setQuestions] = useState([]);
@@ -43,7 +44,7 @@ const AddTest = (props) => {
                                 <span className="label">Въпроси</span>
                             </a>
                         </li>
-                        <li className={stepThreeDone ? '' : step === 3 ? 'active' : 'warning'}
+                        <li className={stepThreeDone ? '' : step === 3 ? '' : 'warning'}
                             onClick={() => setStep(3)}>
                             <a href="#">
                                 <span className="circle">3</span>
@@ -53,6 +54,7 @@ const AddTest = (props) => {
 
                     </ul>
                     {step === 1 && <StepOneForm handleStepOneForm={handleStepOneForm}/>}
+                    {step === 2 && <StepTwoForm />}
                 </div>
             </div>
         </div>
