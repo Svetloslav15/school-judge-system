@@ -1,6 +1,8 @@
 import React, {useEffect} from 'react';
 import ReactDOM from 'react-dom';
 import firebase from './firebase';
+import 'react-toastify/dist/ReactToastify.min.css';
+import { ToastContainer } from 'react-toastify';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
@@ -13,7 +15,6 @@ import {setUser, clearUser} from './store/actions/user-actions';
 import Register from './components/auth/Register';
 import Login from './components/auth/Login';
 import Spinner from './components/common/Spinner';
-import AdminHome from "./components/admin/AdminHome";
 
 const store = createStore(rootReducer);
 
@@ -33,11 +34,14 @@ const Root = (props) => {
     }, []);
 
     return props.isLoading ? <Spinner/> : (
-        <Switch>
-            <Route path="/login" component={Login}/>
-            <Route path="/register" component={Register}/>
-            <Route path="/" component={App}/>
-        </Switch>
+        <div>
+            <ToastContainer/>
+            <Switch>
+                <Route path="/login" component={Login}/>
+                <Route path="/register" component={Register}/>
+                <Route path="/" component={App}/>
+            </Switch>
+        </div>
     )
 };
 

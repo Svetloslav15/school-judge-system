@@ -1,9 +1,9 @@
 import React, {useState, useEffect} from 'react';
 import StepOneForm from './StepOneForm';
 import StepTwoForm from './StepTwoForm';
+import StepThreeForm from './StepThreeForm';
 
 const AddTest = (props) => {
-    const [questions, setQuestions] = useState([]);
     const [step, setStep] = useState(1);
     const [stepOneDone, setStepOneDone] = useState(false);
     const [stepTwoDone, setStepTwoDone] = useState(false);
@@ -20,12 +20,26 @@ const AddTest = (props) => {
         setTest({...test, name, password, time});
     };
 
+    const handleStepTwoForm = (questions) => {
+        setStepTwoDone(true);
+        setStep(3);
+        setTest({...test, questions});
+    };
+
+    const handleStepThreeForm = ({pointsForPoor, pointsForSatisfactory, pointsForGood,
+                                     pointsForVeryGood, pointsForExcellent}) => {
+        setTest({...test, pointsForPoor, pointsForSatisfactory, pointsForGood,
+            pointsForVeryGood, pointsForExcellent});
+        setStepThreeDone(true);
+        setStep(1);
+    };
+
     useEffect(() => {
         console.log(test);
     }, [test]);
 
     return (
-        <div className='jumbotron col-md-11 mx-auto mt-3'>
+        <div className='jumbotron col-md-11 mx-auto my-3'>
             <h3 className='text-center my-0'>Добави тест</h3>
             <div className="row my-0">
                 <div className="col-md-12">
@@ -44,7 +58,7 @@ const AddTest = (props) => {
                                 <span className="label">Въпроси</span>
                             </a>
                         </li>
-                        <li className={stepThreeDone ? '' : step === 3 ? '' : 'warning'}
+                        <li className={stepThreeDone ? '' : step === 3 ? 'active' : 'warning'}
                             onClick={() => setStep(3)}>
                             <a href="#">
                                 <span className="circle">3</span>
@@ -54,7 +68,8 @@ const AddTest = (props) => {
 
                     </ul>
                     {step === 1 && <StepOneForm handleStepOneForm={handleStepOneForm}/>}
-                    {step === 2 && <StepTwoForm />}
+                    {step === 2 && <StepTwoForm handleStepTwoForm={handleStepTwoForm}/>}
+                    {step === 3 && <StepThreeForm handleStepThreeForm={handleStepThreeForm}/>}
                 </div>
             </div>
         </div>
