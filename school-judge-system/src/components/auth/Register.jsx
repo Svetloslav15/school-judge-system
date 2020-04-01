@@ -72,7 +72,7 @@ const Register = () => {
                         <strong>Регистрация за School Judge</strong>
                     </h5>
 
-                    <div className="card-body px-lg-5 pt-4">
+                    <div className="card-body py-0 px-lg-5">
                         <form className="text-center mt-4">
                             <div className='row col-md-12'>
                                 <div className="md-form mb-3 col-md-6">
@@ -103,7 +103,7 @@ const Register = () => {
                                                 console.log(event.currentTarget.value);
                                                 setRole(event.currentTarget.value)
                                             }}>
-                                        <option value='student' selected>Ученик</option>
+                                        <option value='student' defaultValue='student'>Ученик</option>
                                         <option value='teacher'>Учител</option>
                                     </select>
                                 </div>

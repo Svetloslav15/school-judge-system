@@ -3,7 +3,7 @@ import './App.css';
 import Navigation from './components/common/navigation/Navigation';
 import {Switch, Route} from 'react-router-dom';
 import {withRouter} from 'react-router-dom';
-import AddTest from './components/admin/tests/AddTest';
+import AddTest from './components/admin/add-test/AddTest';
 import Home from './components/home/Home';
 
 function App(props) {
