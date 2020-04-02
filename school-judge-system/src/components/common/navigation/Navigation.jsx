@@ -49,8 +49,10 @@ const Navigation = ({user}) => {
                             Здравей, <span className='font-weight-bold'>{user.displayName}</span>!
                         </Link>
                     </li>
-                    <li className="nav-item">
-                        <Link className="nav-link" to="#" onClick={handleSignout}>Изход</Link>
+                    <li className="nav-item ml-1">
+                        <Link className="nav-link" to="#" onClick={handleSignout}>
+                            Изход <i className="fas fa-sign-out-alt"/>
+                        </Link>
                     </li>
                 </ul>
             </div>

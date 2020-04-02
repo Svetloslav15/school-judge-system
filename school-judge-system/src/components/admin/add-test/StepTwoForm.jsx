@@ -1,4 +1,5 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
+import idGenerator from '../../../utils/id-generator';
 
 const letters = 'АБВГДЕЖЗИЙКЛМНОПРСТУФХЧШЩЪЬЮЯ';
 
@@ -10,10 +11,6 @@ const StepTwoForm = ({handleStepTwoForm}) => {
     const [correctAnswer, setCorrectAnswer] = useState('');
     const [options, setOptions] = useState([]);
     const [error, setError] = useState('');
-
-    useEffect(() => {
-        console.log(options);
-    }, [options]);
 
     const addNewOption = () => {
         if (currentOption !== '') {
@@ -27,6 +24,7 @@ const StepTwoForm = ({handleStepTwoForm}) => {
             if (questionType === 'choosable' && correctAnswer !== '') {
                 if (options.length >= 2) {
                     const question = {
+                        id: idGenerator(),
                         content: questionContent,
                         type: questionType,
                         options,
@@ -44,6 +42,7 @@ const StepTwoForm = ({handleStepTwoForm}) => {
             }
             else if (questionType === 'openAnswer') {
                 const question = {
+                    id: idGenerator(),
                     content: questionContent,
                     type: questionType,
                 };

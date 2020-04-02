@@ -1,17 +1,17 @@
 import React, {useState, useEffect} from 'react';
+import {connect} from 'react-redux';
+import idGenerator from '../../../utils/id-generator';
+import firebase from '../../../firebase';
 import StepOneForm from './StepOneForm';
 import StepTwoForm from './StepTwoForm';
 import StepThreeForm from './StepThreeForm';
 
-const AddTest = (props) => {
+const AddTest = ({currentUser}) => {
     const [step, setStep] = useState(1);
     const [stepOneDone, setStepOneDone] = useState(false);
     const [stepTwoDone, setStepTwoDone] = useState(false);
     const [stepThreeDone, setStepThreeDone] = useState(false);
-
-
-    //test: {name, password, timeInMinutes, pointsForPoor, pointsForSatisfactory,
-    // pointsForGood, pointsForVeryGood, pointsForExcellent }
+    const [firebaseRef, setFirebaseRef] = useState(firebase.database().ref());
     const [test, setTest] = useState();
 
     const handleStepOneForm = (name, password, time) => {
@@ -26,12 +26,32 @@ const AddTest = (props) => {
         setTest({...test, questions});
     };
 
-    const handleStepThreeForm = ({pointsForPoor, pointsForSatisfactory, pointsForGood,
-                                     pointsForVeryGood, pointsForExcellent}) => {
-        setTest({...test, pointsForPoor, pointsForSatisfactory, pointsForGood,
-            pointsForVeryGood, pointsForExcellent});
+    const handleStepThreeForm = ({
+                                     pointsForPoor, pointsForSatisfactory, pointsForGood,
+                                     pointsForVeryGood, pointsForExcellent
+                                 }) => {
+        setTest({
+            ...test, pointsForPoor, pointsForSatisfactory, pointsForGood,
+            pointsForVeryGood, pointsForExcellent
+        });
         setStepThreeDone(true);
         setStep(1);
+        submitTest();
+    };
+
+    const submitTest = () => {
+        console.log(test.questions);
+        for (let question of test.questions) {
+            firebaseRef.child('/questions/' + question.id)
+                .set({...question});
+        }
+        test.id = idGenerator();
+        test.questions = test.questions.map(x => x.id);
+        firebaseRef.child('/tests/' + test.id)
+            .set({
+                ...test,
+                authorId: currentUser.uid
+            });
     };
 
     useEffect(() => {
@@ -65,7 +85,6 @@ const AddTest = (props) => {
                                 <span className="label">Завърши теста</span>
                             </a>
                         </li>
-
                     </ul>
                     {step === 1 && <StepOneForm handleStepOneForm={handleStepOneForm}/>}
                     {step === 2 && <StepTwoForm handleStepTwoForm={handleStepTwoForm}/>}
@@ -75,5 +94,7 @@ const AddTest = (props) => {
         </div>
     )
 };
-
-export default AddTest;
+const mapStateToProps = (state) => ({
+    currentUser: state.user.currentUser
+});
+export default connect(mapStateToProps, null)(AddTest);

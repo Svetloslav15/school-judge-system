@@ -93,3 +93,26 @@ html, body, .app {
 .sidebar-logo {
     border-bottom: 2px solid white;
 }
+
+.home-div-container {
+    background-color: #ECF0F1;
+    border: 2px solid #4285F4;
+}
+
+.hr-home {
+    border: 1px solid #4285F4;
+    width: 78%;
+}
+
+.test-listing-div {
+    overflow-y: auto;
+    overflow-x: hidden;
+    max-height: 300px;
+}
+
+.max-width-40 {
+    max-width: 40% !important;
+}
+.w-10 {
+    width: 10%;
+}
