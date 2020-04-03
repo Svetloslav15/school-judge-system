@@ -56,7 +56,7 @@ html, body, .app {
     height: 100vh;
 }
 .bg-image {
-    background-image: url("./assets/images/studying.svg");
+    background-image: url("./assets/images/studying.png");
     height: 100vh;
 }
 .register-wrapper {
@@ -115,4 +115,15 @@ html, body, .app {
 }
 .w-10 {
     width: 10%;
+}
+.border-primary {
+    border: 2px solid #4285F4;
+}
+.bg-light-gray {
+    background-color: #E4EAEE;
+}
+
+.button-size-42 {
+    height: 42px;
+    width: 42px;
 }

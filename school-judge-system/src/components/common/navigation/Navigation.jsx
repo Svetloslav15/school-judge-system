@@ -35,7 +35,7 @@ const Navigation = ({user}) => {
                                 <i className="fas fa-plus-square mr-3"/>
                                 Добави тест
                             </Link>
-                            <Link className="dropdown-item" to="#">
+                            <Link className="dropdown-item" to="/admin/tests/mine">
                                 <i className="fas fa-envelope-open-text mr-3"/>
                                 Мойте тестове
                             </Link>
