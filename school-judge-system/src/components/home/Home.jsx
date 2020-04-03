@@ -1,6 +1,43 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
+import testService from '../../services/test-service';
 
 const Home = () => {
+    const [activeTests, setActiveTests] = useState([]);
+    const [archivedTests, setArchivedTests] = useState([]);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        testService.getTests()
+            .then((data) => {
+                let currActive = [];
+                let currArchived = [];
+                for (let test of data) {
+                    if (test.status === "active") {
+                        currActive.push(test);
+                    }
+                    else {
+                        currArchived.push(test);
+                    }
+                }
+                setActiveTests(currActive);
+                setLoading(false);
+                setArchivedTests(currArchived);
+            });
+    }, []);
+
+    const displayActiveTests = (tests) => (
+        tests.map((x, i) => (<li key={i} className="row d-flex list-group-item">
+            <div className="col-md-8">{x.name}</div>
+            <div className="col-md-3 max-width-40">
+                <button className="btn btn-outline-primary btn-md mr-auto">Влез</button>
+            </div>
+        </li>))
+    );
+
+    const displayArchivedTests = (tests) => (
+        tests.map((x, i) => (<li key={i} className="row d-flex list-group-item">{x.name}</li>))
+    );
+
     return (
         <div className='row mx-auto my-3 jumbotron container home-div-container'>
             <h1 className='mx-auto'>School Judge</h1>
@@ -18,59 +55,16 @@ const Home = () => {
                     <h4 className="text-center">Активни тестове</h4>
                     <hr className="hr-home"/>
                     <ul className="list-group list-group-flush test-listing-div">
-                        <li className="row d-flex list-group-item">
-                            <div className="col-md-8">Тест по мат - Биляна Поповска</div>
-                            <div className="col-md-3 max-width-40">
-                                <button className="btn btn-outline-primary btn-md mr-auto">Влез</button>
-                            </div>
-                        </li>
-                        <li className="row d-flex list-group-item">
-                            <div className="col-md-8">Тест по мат - Биляна Поповска</div>
-                            <div className="col-md-3 max-width-40">
-                                <button className="btn btn-outline-primary btn-md mr-auto">Влез</button>
-                            </div>
-                        </li>
-                        <li className="row d-flex list-group-item">
-                            <div className="col-md-8">Тест dsvsvfdvsdvsdvsfffffffffffffffпо мат - Биляна Поповска</div>
-                            <div className="col-md-3 max-width-40">
-                                <button className="btn btn-outline-primary btn-md mr-auto">Влез</button>
-                            </div>
-                        </li>
-                        <li className="row d-flex list-group-item">
-                            <div className="col-md-8">Тест пfvbggggggggggо мат - Биляна Поповска</div>
-                            <div className="col-md-3 max-width-40">
-                                <button className="btn btn-outline-primary btn-md mr-auto">Влез</button>
-                            </div>
-                        </li>
-                        <li className="row d-flex list-group-item">
-                            <div className="col-md-8">Тест sdfffffffпо мат - Биляна Поповска</div>
-                            <div className="col-md-3 max-width-40">
-                                <button className="btn btn-outline-primary btn-md mr-auto">Влез</button>
-                            </div>
-                        </li>
-                        <li className="row d-flex list-group-item">
-                            <div className="col-md-8">Тест - Биляна Поповска</div>
-                            <div className="col-md-3 max-width-40">
-                                <button className="btn btn-outline-primary btn-md mr-auto">Влез</button>
-                            </div>
-                        </li>
+                        {activeTests && displayActiveTests(activeTests)}
+                        {loading && <li className="list-group-item text-center h4">Зареждане...</li>}
                     </ul>
                 </div>
                 <div className="col-md-5 ml-auto">
                     <h4 className="text-center">Предишни тестове</h4>
                     <hr className="hr-home"/>
                     <ul className="list-group list-group-flush test-listing-div">
-                        <li className="list-group-item">Тест по мат - <span
-                            className="font-weight-bold">Биляна Поповска</span></li>
-                        <li className="list-group-item">Dapibus ac facilisis in</li>
-                        <li className="list-group-item">Dapibus ac facilisis in</li>
-                        <li className="list-group-item">Dapibus ac facilisis in</li>
-                        <li className="list-group-item">Dapibus ac facilisis in</li>
-                        <li className="list-group-item">Dapibus ac facilisis in</li>
-                        <li className="list-group-item">Dapibus ac facilisis in</li>
-                        <li className="list-group-item">Morbi leo risus</li>
-                        <li className="list-group-item">Porta ac consectetur ac</li>
-                        <li className="list-group-item">Vestibulum at eros</li>
+                        {archivedTests && displayArchivedTests(archivedTests)}
+                        {loading && <li className="list-group-item text-center h4">Зареждане...</li>}
                     </ul>
                 </div>
             </div>

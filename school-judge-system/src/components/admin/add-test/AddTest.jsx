@@ -5,6 +5,7 @@ import firebase from '../../../firebase';
 import StepOneForm from './StepOneForm';
 import StepTwoForm from './StepTwoForm';
 import StepThreeForm from './StepThreeForm';
+import Navigation from '../../common/navigation/Navigation';
 
 const AddTest = ({currentUser}) => {
     const [step, setStep] = useState(1);
@@ -40,7 +41,6 @@ const AddTest = ({currentUser}) => {
     };
 
     const submitTest = () => {
-        console.log(test.questions);
         for (let question of test.questions) {
             firebaseRef.child('/questions/' + question.id)
                 .set({...question});
@@ -59,36 +59,39 @@ const AddTest = ({currentUser}) => {
     }, [test]);
 
     return (
-        <div className='jumbotron col-md-11 mx-auto my-3'>
-            <h3 className='text-center my-0'>Добави тест</h3>
-            <div className="row my-0">
-                <div className="col-md-12">
-                    <ul className="stepper stepper-horizontal my-0">
-                        <li className={stepOneDone ? '' : step === 1 ? 'active' : 'warning'}
-                            onClick={() => setStep(1)}>
-                            <a href="#">
-                                <span className="circle">1</span>
-                                <span className="label">Име и парола</span>
-                            </a>
-                        </li>
-                        <li className={stepTwoDone ? '' : step === 2 ? 'active' : 'warning'}
-                            onClick={() => setStep(2)}>
-                            <a href="#">
-                                <span className="circle">2</span>
-                                <span className="label">Въпроси</span>
-                            </a>
-                        </li>
-                        <li className={stepThreeDone ? '' : step === 3 ? 'active' : 'warning'}
-                            onClick={() => setStep(3)}>
-                            <a href="#">
-                                <span className="circle">3</span>
-                                <span className="label">Завърши теста</span>
-                            </a>
-                        </li>
-                    </ul>
-                    {step === 1 && <StepOneForm handleStepOneForm={handleStepOneForm}/>}
-                    {step === 2 && <StepTwoForm handleStepTwoForm={handleStepTwoForm}/>}
-                    {step === 3 && <StepThreeForm handleStepThreeForm={handleStepThreeForm}/>}
+        <div className='bg-image'>
+            <Navigation/>
+            <div className='jumbotron col-md-11 mx-auto my-3'>
+                <h3 className='text-center my-0'>Добави тест</h3>
+                <div className="row my-0">
+                    <div className="col-md-12">
+                        <ul className="stepper stepper-horizontal my-0">
+                            <li className={stepOneDone ? '' : step === 1 ? 'active' : 'warning'}
+                                onClick={() => setStep(1)}>
+                                <a href="#">
+                                    <span className="circle">1</span>
+                                    <span className="label">Име и парола</span>
+                                </a>
+                            </li>
+                            <li className={stepTwoDone ? '' : step === 2 ? 'active' : 'warning'}
+                                onClick={() => setStep(2)}>
+                                <a href="#">
+                                    <span className="circle">2</span>
+                                    <span className="label">Въпроси</span>
+                                </a>
+                            </li>
+                            <li className={stepThreeDone ? '' : step === 3 ? 'active' : 'warning'}
+                                onClick={() => setStep(3)}>
+                                <a href="#">
+                                    <span className="circle">3</span>
+                                    <span className="label">Завърши теста</span>
+                                </a>
+                            </li>
+                        </ul>
+                        {step === 1 && <StepOneForm handleStepOneForm={handleStepOneForm}/>}
+                        {step === 2 && <StepTwoForm handleStepTwoForm={handleStepTwoForm}/>}
+                        {step === 3 && <StepThreeForm handleStepThreeForm={handleStepThreeForm}/>}
+                    </div>
                 </div>
             </div>
         </div>

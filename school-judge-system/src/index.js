@@ -15,6 +15,8 @@ import {setUser, clearUser} from './store/actions/user-actions';
 import Register from './components/auth/Register';
 import Login from './components/auth/Login';
 import Spinner from './components/common/Spinner';
+import MyTests from './components/admin/my-tests/MyTests';
+import AddTest from './components/admin/add-test/AddTest';
 
 const store = createStore(rootReducer);
 
@@ -39,6 +41,8 @@ const Root = (props) => {
             <Switch>
                 <Route path="/login" component={Login}/>
                 <Route path="/register" component={Register}/>
+                <Route path="/admin/tests/add" component={AddTest}/>
+                <Route path="/admin/tests/mine" component={MyTests}/>
                 <Route path="/" component={App}/>
             </Switch>
         </div>
