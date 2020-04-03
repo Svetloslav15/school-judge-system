@@ -1,7 +1,5 @@
 import React, {useState} from 'react';
 import {Link} from 'react-router-dom';
-import {Layout, Form, Input, Button, Typography} from 'antd';
-import {UserOutlined} from '@ant-design/icons';
 import firebase from '../../firebase';
 
 const Login = () => {

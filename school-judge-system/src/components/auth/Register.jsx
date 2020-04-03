@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 import {Link} from 'react-router-dom';
-import {UserOutlined, MailOutlined} from '@ant-design/icons';
 import firebase from '../../firebase';
 
 const Register = () => {
