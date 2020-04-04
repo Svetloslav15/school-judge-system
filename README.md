@@ -1,1 +1,3 @@
-# school-judge-system
+# School Judge
+
+System for testing students.
