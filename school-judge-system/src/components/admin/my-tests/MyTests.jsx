@@ -1,7 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {connect} from 'react-redux';
 import firebase from '../../../firebase';
-import {Link} from 'react-router-dom';
 import Navigation from '../../common/navigation/Navigation';
 import testService from '../../../services/test-service';
 

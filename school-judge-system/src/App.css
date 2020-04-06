@@ -2,7 +2,11 @@
 
 html, body, .app {
     height: 100vh;
-    background-color: #eee;
+    background-image: url("./assets/images/studying.png");
+    font-family: 'Montserrat', sans-serif;
+}
+
+* {
     font-family: 'Montserrat', sans-serif;
 }
 
@@ -55,25 +59,31 @@ html, body, .app {
     background-image: url("./assets/images/studying.svg");
     height: 100vh;
 }
+
 .bg-image {
     background-image: url("./assets/images/studying.png");
     height: 100vh;
 }
+
 .register-wrapper {
     background-image: url("./assets/images/exam.svg");
     height: 100vh;
 }
+
 .p-form {
     padding: 2em 4em !important;
 }
+
 .form-div {
     margin-top: 10vh;
     border-radius: 5px;
     border: 4px solid white;
 }
+
 .text-red {
     color: #F8383C;
 }
+
 .role-message {
     color: #FFA000;
     text-align: left;
@@ -113,12 +123,15 @@ html, body, .app {
 .max-width-40 {
     max-width: 40% !important;
 }
+
 .w-10 {
     width: 10%;
 }
+
 .border-primary {
     border: 2px solid #4285F4;
 }
+
 .bg-light-gray {
     background-color: #ECF0F1;
 }
@@ -126,4 +139,65 @@ html, body, .app {
 .button-size-42 {
     height: 42px;
     width: 42px;
+}
+
+.border-primary-3 {
+    border: 3px solid #4285F4;
+}
+
+.question-number-div {
+    width: 33px;
+    height: 33px;
+}
+
+.bg-green {
+    background-color: #1DBF73;
+}
+
+.bg-red {
+    background-color: #F65264;
+}
+
+.text-20 {
+    font-size: 20px;
+}
+
+.text-25 {
+    font-size: 25px;
+}
+
+.text-27 {
+    font-size: 27px;
+}
+
+.bg-transparent {
+    background-color: transparent;
+}
+
+.bg-gray-light {
+    background-color: #EAEAEA;
+}
+
+.border-primary-all-but-top {
+    border: 2px solid #4285F4;
+    border-top: none;
+}
+
+.quest-bg-shape {
+    top: 0;
+    clip-path: polygon(63% 0, 100% 47%, 63% 100%, 0 99%, 0 0);
+    position: absolute;
+    background-color: #C6D2E8;
+    width: 80%;
+    z-index: 1;
+    height: 100%;
+}
+
+.z-index-10 {
+    z-index: 10;
+}
+
+.answer-hovered {
+    background-color: #4285F4;
+    color: white;
 }

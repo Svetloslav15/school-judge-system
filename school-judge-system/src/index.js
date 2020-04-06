@@ -18,7 +18,6 @@ import Spinner from './components/common/Spinner';
 import MyTests from './components/admin/my-tests/MyTests';
 import AddTest from './components/admin/add-test/AddTest';
 import TestHome from './components/test/test-home/TestHome';
-
 const store = createStore(rootReducer);
 
 const Root = (props) => {
@@ -40,12 +39,12 @@ const Root = (props) => {
         <div>
             <ToastContainer/>
             <Switch>
-                <Route path="/login" component={Login}/>
-                <Route path="/register" component={Register}/>
-                <Route path="/test/home" component={TestHome}/>
-                <Route path="/admin/tests/add" component={AddTest}/>
-                <Route path="/admin/tests/mine" component={MyTests}/>
-                <Route path="/" component={TestHome}/>
+                <Route exact path="/" component={TestHome}/>
+                <Route exact path="/login" component={Login}/>
+                <Route exact path="/register" component={Register}/>
+                <Route exact path="/test/home" component={TestHome}/>
+                <Route exact path="/admin/tests/add" component={AddTest}/>
+                <Route exact path="/admin/tests/mine" component={MyTests}/>
             </Switch>
         </div>
     )
