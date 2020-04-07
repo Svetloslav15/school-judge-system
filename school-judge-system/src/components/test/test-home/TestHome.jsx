@@ -1,29 +1,41 @@
 import React, {useState, useEffect} from 'react';
+import {connect} from 'react-redux';
 import NumberQuestion from './NumberQuestion';
 import AnswerOption from './AnswerOption';
 import testService from '../../../services/test-service';
 import questionService from '../../../services/question-service';
+import {setCurrentQuestion, addQuestions, addQuestionToAnsweredQuestions} from '../../../store/actions/test-actions';
+import Timer from "./Timer";
 
-const TestHome = ({id, match}) => {
+const TestHome = ({
+                      id, match,
+                      currentQuestion, questions, answeredQuestions,
+                      setCurrentQuestion, addQuestions, addQuestionToAnsweredQuestions
+                  }) => {
     const [test, setTest] = useState('');
-    const [questions, setQuestions] = useState([]);
+    const [currQuestions, setQuestions] = useState([]);
+    let [timeLeft, setTimeLeft] = useState(null);
 
     useEffect(() => {
         const testId = match.params.id;
-        testService.getTestById(testId)
-            .then((data) => {
-                setTest(data);
-            });
-        questionService.getQuestionsForTest(testId)
-            .then((data) => {
-                setQuestions(data);
-            });
+        handleData(testId);
     }, []);
+
+    const handleData = async (testId) => {
+        let testData = await testService.getTestById(testId);
+        setTest(testData);
+        setTimeLeft(+testData.time * 60);
+        let questionData = questionService.getQuestionsForTest(testId);
+        setQuestions(questionData);
+    };
+
+    const timeIsOver = () => {
+        //console.log('Времето свърши!');
+    };
 
     return (
         <div className='col-sm-10 col-md-10 bg-transparent mx-auto my-5'>
             <div className='col-md-12 border-primary row mx-auto'>
-                {questions.length}
                 <div className='col-md-7 row'>
                     <NumberQuestion type='green' value={1}/>
                     <NumberQuestion type='red' value={2}/>
@@ -46,11 +58,7 @@ const TestHome = ({id, match}) => {
                     <NumberQuestion type='red' value={19}/>
                     <NumberQuestion type='red' value={20}/>
                 </div>
-                <div className='col-md-5 py-4 text-right'>
-                    <p className='text-20'>Оставащо време:
-                        <span className='text-25 font-weight-bold ml-3'> {test.time}</span>
-                    </p>
-                </div>
+              <Timer time={timeLeft} timeIsOver={timeIsOver}/>
             </div>
             <div className='col-md-12 row bg-gray-light border-primary-all-but-top pl-0 pt-3 pb-3 pr-3 mx-auto'>
                 <div className='col-md-10 z-index-10 mx-auto mb-4'>
@@ -69,5 +77,10 @@ const TestHome = ({id, match}) => {
         </div>
     )
 };
+const mapStateToProps = (state) => ({
+    currentQuestion: state.test.currentQuestion,
+    questions: state.test.questions,
+    answeredQuestions: state.test.answeredQuestions
+});
 
-export default TestHome;
+export default connect(mapStateToProps, {setCurrentQuestion, addQuestions, addQuestionToAnsweredQuestions})(TestHome);

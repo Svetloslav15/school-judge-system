@@ -40,7 +40,6 @@ const Home = () => {
     const displayArchivedTests = (tests) => (
         tests.map((x, i) => (<li key={i} className="row d-flex list-group-item">{x.name}</li>))
     );
-    console.log(activeTests);
 
     return (
         <div className='row mx-auto my-3 jumbotron container home-div-container'>

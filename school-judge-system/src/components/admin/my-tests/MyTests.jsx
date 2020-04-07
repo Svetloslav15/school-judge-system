@@ -1,13 +1,11 @@
 import React, {useState, useEffect} from 'react';
 import {connect} from 'react-redux';
-import firebase from '../../../firebase';
 import Navigation from '../../common/navigation/Navigation';
 import testService from '../../../services/test-service';
 
 const $ = window.$;
 
 const MyTests = (props) => {
-    const [testsRef, setTestsRef] = useState(firebase.database().ref('/tests'));
     const [loading, setLoading] = useState(true);
     const [tests, setTests] = useState([]);
 
