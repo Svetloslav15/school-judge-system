@@ -15,7 +15,7 @@ const Navigation = ({user}) => {
     return (
         <nav className="navbar navbar-expand-lg navbar-dark primary-color">
 
-            <Link className="navbar-brand h1 font-weight-bold" to="/test/home">School Judge</Link>
+            <Link className="navbar-brand h1 font-weight-bold" to="/">School Judge</Link>
 
             <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav"
                     aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -26,9 +26,6 @@ const Navigation = ({user}) => {
                 <ul className="navbar-nav mr-auto">
                     <li className="nav-item">
                         <Link className="nav-link" to="/">Начало</Link>
-                    </li>
-                    <li className="nav-item">
-                        <Link className="nav-link" to="/test/home">Тест Старт</Link>
                     </li>
                     <li className="nav-item dropdown">
                         <a className="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown"

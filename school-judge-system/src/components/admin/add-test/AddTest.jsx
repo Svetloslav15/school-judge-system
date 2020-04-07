@@ -13,7 +13,11 @@ const AddTest = ({currentUser}) => {
     const [stepTwoDone, setStepTwoDone] = useState(false);
     const [stepThreeDone, setStepThreeDone] = useState(false);
     const [firebaseRef, setFirebaseRef] = useState(firebase.database().ref());
-    const [test, setTest] = useState();
+    const [test, setTest] = useState({});
+
+    useEffect(() => {
+        test.id = idGenerator();
+    }, []);
 
     const handleStepOneForm = (name, password, time) => {
         setStepOneDone(true);
@@ -45,7 +49,6 @@ const AddTest = ({currentUser}) => {
             firebaseRef.child('/questions/' + question.id)
                 .set({...question});
         }
-        test.id = idGenerator();
         test.status = 'archived';
         test.questions = test.questions.map(x => x.id);
         firebaseRef.child('/tests/' + test.id)
@@ -55,9 +58,6 @@ const AddTest = ({currentUser}) => {
             });
     };
 
-    useEffect(() => {
-        console.log(test);
-    }, [test]);
 
     return (
         <div className='bg-image'>
@@ -90,7 +90,7 @@ const AddTest = ({currentUser}) => {
                             </li>
                         </ul>
                         {step === 1 && <StepOneForm handleStepOneForm={handleStepOneForm}/>}
-                        {step === 2 && <StepTwoForm handleStepTwoForm={handleStepTwoForm}/>}
+                        {step === 2 && <StepTwoForm testId={test.id && test.id} handleStepTwoForm={handleStepTwoForm}/>}
                         {step === 3 && <StepThreeForm handleStepThreeForm={handleStepThreeForm}/>}
                     </div>
                 </div>

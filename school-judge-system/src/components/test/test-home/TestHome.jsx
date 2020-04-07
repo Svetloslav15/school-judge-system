@@ -1,13 +1,29 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import NumberQuestion from './NumberQuestion';
 import AnswerOption from './AnswerOption';
+import testService from '../../../services/test-service';
+import questionService from '../../../services/question-service';
 
-const TestHome = (props) => {
-    const [urlParams] = useState(props.match.params.id);
+const TestHome = ({id, match}) => {
+    const [test, setTest] = useState('');
+    const [questions, setQuestions] = useState([]);
+
+    useEffect(() => {
+        const testId = match.params.id;
+        testService.getTestById(testId)
+            .then((data) => {
+                setTest(data);
+            });
+        questionService.getQuestionsForTest(testId)
+            .then((data) => {
+                setQuestions(data);
+            });
+    }, []);
 
     return (
         <div className='col-sm-10 col-md-10 bg-transparent mx-auto my-5'>
             <div className='col-md-12 border-primary row mx-auto'>
+                {questions.length}
                 <div className='col-md-7 row'>
                     <NumberQuestion type='green' value={1}/>
                     <NumberQuestion type='red' value={2}/>
@@ -31,7 +47,8 @@ const TestHome = (props) => {
                     <NumberQuestion type='red' value={20}/>
                 </div>
                 <div className='col-md-5 py-4 text-right'>
-                    <p className='text-20'>Оставащо време: {urlParams}<span className='text-25 font-weight-bold ml-3'> 39:59</span>
+                    <p className='text-20'>Оставащо време:
+                        <span className='text-25 font-weight-bold ml-3'> {test.time}</span>
                     </p>
                 </div>
             </div>

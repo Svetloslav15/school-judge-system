@@ -3,7 +3,7 @@ import idGenerator from '../../../utils/id-generator';
 
 const letters = 'АБВГДЕЖЗИЙКЛМНОПРСТУФХЧШЩЪЬЮЯ';
 
-const StepTwoForm = ({handleStepTwoForm}) => {
+const StepTwoForm = ({handleStepTwoForm, testId}) => {
     const [questions, setQuestions] = useState([]);
     const [questionType, setQuestionType] = useState('choosable');
     const [questionContent, setQuestionContent] = useState('');
@@ -34,7 +34,8 @@ const StepTwoForm = ({handleStepTwoForm}) => {
                         type: questionType,
                         points: +points,
                         options,
-                        correctAnswer
+                        correctAnswer,
+                        testId
                     };
                     setQuestions(questions.concat(question));
                     setQuestionType('choosable');
@@ -52,6 +53,7 @@ const StepTwoForm = ({handleStepTwoForm}) => {
                     content: questionContent,
                     points: +points,
                     type: questionType,
+                    testId
                 };
                 setQuestions(questions.concat(question));
                 setQuestionType('openAnswer');
