@@ -101,7 +101,7 @@ const StepTwoForm = ({handleStepTwoForm}) => {
                     </select>
                     {questionType === 'choosable' && (<div className='mt-2'>
                         <p>Изберете правилния отговор: </p>
-                        <select className="browser-default custom-select"
+                        <select defaultValue={'Изберете правилния отговор'} className="browser-default custom-select"
                                 onChange={(event) => {
                                     setCorrectAnswer(event.currentTarget.value)
                                 }}>

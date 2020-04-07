@@ -4,7 +4,7 @@ import AnswerOption from './AnswerOption';
 
 const TestHome = () => {
     return (
-        <div className='col-md-10 bg-transparent mx-auto my-5'>
+        <div className='col-sm-10 col-md-10 bg-transparent mx-auto my-5'>
             <div className='col-md-12 border-primary row'>
                 <div className='col-md-7 row'>
                     <NumberQuestion type='green' value={1}/>

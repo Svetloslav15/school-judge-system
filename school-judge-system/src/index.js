@@ -39,7 +39,7 @@ const Root = (props) => {
         <div>
             <ToastContainer/>
             <Switch>
-                <Route exact path="/" component={TestHome}/>
+                <Route exact path="/" component={App}/>
                 <Route exact path="/login" component={Login}/>
                 <Route exact path="/register" component={Register}/>
                 <Route exact path="/test/home" component={TestHome}/>
