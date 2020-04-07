@@ -9,6 +9,7 @@ const StepTwoForm = ({handleStepTwoForm}) => {
     const [questionContent, setQuestionContent] = useState('');
     const [currentOption, setCurrentOption] = useState('');
     const [correctAnswer, setCorrectAnswer] = useState('');
+    const [points, setPoints] = useState('');
     const [options, setOptions] = useState([]);
     const [error, setError] = useState('');
 
@@ -21,12 +22,17 @@ const StepTwoForm = ({handleStepTwoForm}) => {
 
     const addQuestion = () => {
         if (questionContent !== '') {
+            if (+points <= 0) {
+                setError('Точките за въпроса трябва да са повече от 0');
+                return;
+            }
             if (questionType === 'choosable' && correctAnswer !== '') {
                 if (options.length >= 2) {
                     const question = {
                         id: idGenerator(),
                         content: questionContent,
                         type: questionType,
+                        points: +points,
                         options,
                         correctAnswer
                     };
@@ -44,6 +50,7 @@ const StepTwoForm = ({handleStepTwoForm}) => {
                 const question = {
                     id: idGenerator(),
                     content: questionContent,
+                    points: +points,
                     type: questionType,
                 };
                 setQuestions(questions.concat(question));
@@ -89,6 +96,12 @@ const StepTwoForm = ({handleStepTwoForm}) => {
                               value={questionContent}
                     />
                     <label htmlFor="question-input">Въпрос...</label>
+                    <div className="md-form">
+                        <input type="number" id="input-question-points" className="form-control"
+                               value={points}
+                               onChange={(event) => setPoints(event.target.value)}/>
+                        <label htmlFor="input-question-points">Точки за въпроса:</label>
+                    </div>
                 </div>
                 <div className="md-form col-md-6">
                     <p>Вид на въпроса: </p>

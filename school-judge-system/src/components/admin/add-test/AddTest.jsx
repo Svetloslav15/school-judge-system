@@ -46,6 +46,7 @@ const AddTest = ({currentUser}) => {
                 .set({...question});
         }
         test.id = idGenerator();
+        test.status = 'archived';
         test.questions = test.questions.map(x => x.id);
         firebaseRef.child('/tests/' + test.id)
             .set({

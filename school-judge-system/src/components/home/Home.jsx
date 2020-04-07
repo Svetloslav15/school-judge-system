@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import testService from '../../services/test-service';
+import StartTestModal from './StartTestModal';
 
 const Home = () => {
     const [activeTests, setActiveTests] = useState([]);
@@ -26,17 +27,20 @@ const Home = () => {
     }, []);
 
     const displayActiveTests = (tests) => (
-        tests.map((x, i) => (<li key={i} className="row d-flex list-group-item">
-            <div className="col-md-8">{x.name}</div>
-            <div className="col-md-3 max-width-40">
-                <button className="btn btn-outline-primary btn-md mr-auto">Влез</button>
-            </div>
-        </li>))
+        tests.map((x, i) => (<StartTestModal key={i} id={x.id}>
+            <li className="row d-flex list-group-item">
+                <div className="col-md-8">{x.name}</div>
+                <div className="col-md-3 max-width-40">
+                    <button className="btn btn-outline-primary btn-md mr-auto">Влез</button>
+                </div>
+            </li>
+        </StartTestModal>))
     );
 
     const displayArchivedTests = (tests) => (
         tests.map((x, i) => (<li key={i} className="row d-flex list-group-item">{x.name}</li>))
     );
+    console.log(activeTests);
 
     return (
         <div className='row mx-auto my-3 jumbotron container home-div-container'>

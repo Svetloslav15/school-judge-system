@@ -11,5 +11,15 @@ export default {
             tests.push(testObject[test]);
         }
         return tests;
+    },
+    getTestById: async (id) => {
+        let snapshot = await testsRef.once('value');
+        let testObject = snapshot.val();
+        for (let test of Object.keys(testObject)) {
+            if (testObject[test].id === id) {
+                return testObject[test];
+            }
+        }
+        return null;
     }
 }

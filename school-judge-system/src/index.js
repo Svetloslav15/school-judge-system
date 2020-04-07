@@ -42,7 +42,7 @@ const Root = (props) => {
                 <Route exact path="/" component={App}/>
                 <Route exact path="/login" component={Login}/>
                 <Route exact path="/register" component={Register}/>
-                <Route exact path="/test/home" component={TestHome}/>
+                <Route exact path="/test/home/:id" component={TestHome}/>
                 <Route exact path="/admin/tests/add" component={AddTest}/>
                 <Route exact path="/admin/tests/mine" component={MyTests}/>
             </Switch>
