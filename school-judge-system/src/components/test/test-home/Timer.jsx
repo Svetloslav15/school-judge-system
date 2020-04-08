@@ -2,7 +2,6 @@ import React, {useState, useEffect} from 'react';
 
 const Timer = ({time, timeIsOver}) => {
     let [timeLeft, setTime] = useState(null);
-    const [interval, setIntervalSetter] = useState(null);
     let [isProcessed, setProcessed] = useState(false);
     const [isLoading, setLoading] = useState(true);
 
@@ -10,13 +9,12 @@ const Timer = ({time, timeIsOver}) => {
         if (isLoading) {
             setTime(time);
         }
-        console.log(timeLeft);
         if (timeLeft) {
             setLoading(false);
         }
         if (!isLoading && !isProcessed) {
             setProcessed(true);
-            setInterval(() => {
+            let interval = setInterval(() => {
                 if (timeLeft - 1 <= 0) {
                     clearInterval(interval);
                     timeIsOver();
