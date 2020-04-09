@@ -201,3 +201,7 @@ html, body, .app {
     background-color: #4285F4;
     color: white;
 }
+
+.cursor-pointer {
+    cursor: pointer;
+}

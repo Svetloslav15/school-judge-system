@@ -16,11 +16,18 @@ const TestHome = ({
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
     const [currQuestions, setQuestions] = useState([]);
     let [timeLeft, setTimeLeft] = useState(null);
+    const [activeOption, setActiveOption] = useState(null);
+    const [isLoaded, setLoaded] = useState(false);
+    const [optionsToDisplay, setOptionsToDisplay] = useState([]);
 
     useEffect(() => {
-        const testId = match.params.id;
-        handleData(testId);
-    }, []);
+        if (!isLoaded) {
+            setLoaded(true);
+            const testId = match.params.id;
+            handleData(testId);
+        }
+        displayOptions();
+    }, [activeOption]);
 
     const handleData = (testId) => {
         testService.getTestById(testId)
@@ -52,17 +59,39 @@ const TestHome = ({
         alert('Времето свърши!');
     };
 
+    const changeActiveOption = (index) => {
+        setActiveOption(index);
+    };
+
     const displayQuestionNav = () => {
         const result = [];
         for (let index = 0; index < currQuestions.length; index++) {
             if (answeredQuestions.filter(x => x === currQuestions[index].id).length === 0) {
-                result.push(<NumberQuestion type='red' value={index + 1}/>);
+                result.push(<NumberQuestion key={index} type='red' value={index + 1}/>);
             }
             else {
-                result.push(<NumberQuestion type='green' value={index + 1}/>);
+                result.push(<NumberQuestion key={index} type='green' value={index + 1}/>);
             }
         }
         return result;
+    };
+
+    const displayOptions = () => {
+        if (currentQuestion) {
+            if (currentQuestion.type === 'choosable') {
+                let result = [];
+                for (let index = 0; index < currentQuestion.options.length; index++) {
+                    result.push(<AnswerOption key={index}
+                                              value={currentQuestion.options[index]}
+                                              index={index}
+                                              toggleActiveOption={changeActiveOption}
+                                              isActive={index === activeOption}
+                    />)
+                }
+                setOptionsToDisplay(result);
+            }
+        }
+
     };
 
     return (
@@ -72,6 +101,7 @@ const TestHome = ({
                     {currQuestions && displayQuestionNav()}
                 </div>
                 <Timer time={timeLeft} timeIsOver={timeIsOver}/>
+                {activeOption}
             </div>
             <div className='col-md-12 row bg-gray-light border-primary-all-but-top pl-0 pt-3 pb-3 pr-3 mx-auto'>
                 <div className='col-md-10 z-index-10 mx-auto mb-4'>
@@ -79,12 +109,13 @@ const TestHome = ({
                 </div>
                 <div className="quest-bg-shape"/>
                 <div className='row col-md-10 mx-auto'>
-                    <AnswerOption/>
-                    <AnswerOption/>
-                    <AnswerOption/>
-                    <AnswerOption/>
+                    {currentQuestion.type === 'choosable' ? (optionsToDisplay) :
+                        (<div className="md-form col-md-10 mx-auto z-index-10 bg-white">
+                            <textarea id="answer-input" className="md-textarea form-control" rows="6"/>
+                            <label htmlFor="answer-input">Въведи отговор...</label>
+                        </div>)}
                 </div>
-                <button onClick={changeQuestion} className="btn btn-primary rounded z-index-10 mx-auto">
+                <button onClick={changeQuestion} className="btn btn-primary rounded z-index-10 mx-auto sm-mt-2">
                     <i className="fas fa-arrow-circle-right"/>
                 </button>
             </div>
