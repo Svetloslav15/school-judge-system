@@ -7,8 +7,11 @@ import NumberQuestion from './NumberQuestion';
 import AnswerOption from './AnswerOption';
 import testService from '../../../services/test-service';
 import questionService from '../../../services/question-service';
+import submitionService from '../../../services/submition-service';
+
 import {setCurrentQuestion, addQuestions, addQuestionToAnsweredQuestions} from '../../../store/actions/test-actions';
 import Timer from './Timer';
+import idGenerator from '../../../utils/id-generator';
 
 const TestHome = ({
                       id, match, currentUser, history,
@@ -25,9 +28,10 @@ const TestHome = ({
     const [optionsToDisplay, setOptionsToDisplay] = useState([]);
     const [submition, setSubmition] = useState({
         points: 0,
+        id: idGenerator(),
         date: new Date(),
         userId: currentUser.uid,
-        status: 'В момента се решава',
+        status: 'Изчаква да бъде проверен',
         answers: []
     });
 
@@ -72,7 +76,10 @@ const TestHome = ({
         setActiveOption(null);
         setAnswerInput(null);
         if (currentQuestionIndex + 1 >= currQuestions.length) {
-            if (currentQuestionIndex === currQuestions.length - 1) {
+            if (currentQuestionIndex === currQuestions.length - 1 &&
+                isAnswered &&
+                answeredQuestions.length >= currQuestions.length) {
+                submitionService.createSubmition(submition);
                 toast.success(<div><i className="far fa-check-circle mr-3"/>Успешно изпратихте вашето решение!</div>);
                 history.push('/test/finish');
                 return;
@@ -84,6 +91,7 @@ const TestHome = ({
                 </div>)
             }
             else {
+                submitionService.createSubmition(submition);
                 toast.success(<div><i className="far fa-check-circle mr-3"/>Успешно изпратихте вашето решение!</div>);
                 history.push('/test/finish');
             }
