@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
+import {connect} from 'react-redux';
 
-const Timer = ({time, timeIsOver}) => {
+const Timer = ({time, timeIsOver, isTimerWorking}) => {
     let [timeLeft, setTime] = useState(null);
     let [isProcessed, setProcessed] = useState(false);
     const [isLoading, setLoading] = useState(true);
@@ -19,12 +20,14 @@ const Timer = ({time, timeIsOver}) => {
                     clearInterval(interval);
                     timeIsOver();
                 }
-                console.log(timeLeft);
+                if (!isTimerWorking) {
+                    clearInterval(interval);
+                }
                 setTime(timeLeft--);
             }, 1000);
         }
 
-    }, [time, timeLeft, isLoading]);
+    }, [time, timeLeft, isLoading, isTimerWorking]);
 
     return (
         <div className='col-md-5 py-4 text-right'>
@@ -38,5 +41,8 @@ const Timer = ({time, timeIsOver}) => {
         </div>
     );
 };
+const mapStateToProps = (state) => ({
+    isTimerWorking: state.test.isTimerWorking
+});
 
-export default Timer;
+export default connect(mapStateToProps, null)(Timer);

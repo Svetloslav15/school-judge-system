@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import {connect} from 'react-redux';
 import {toast} from 'react-toastify';
 import {withRouter} from 'react-router-dom';
+import {setIsTimerWorking, setIsTestStarted} from '../../../store/actions/test-actions';
 
 import NumberQuestion from './NumberQuestion';
 import AnswerOption from './AnswerOption';
@@ -12,11 +13,12 @@ import submitionService from '../../../services/submition-service';
 import {setCurrentQuestion, addQuestions, addQuestionToAnsweredQuestions} from '../../../store/actions/test-actions';
 import Timer from './Timer';
 import idGenerator from '../../../utils/id-generator';
-let cheatedCouter = 0;
+
 let loadingBlur = false;
+let cheatedCouter = 0;
 
 const TestHome = ({
-                      id, match, currentUser, history,
+                      id, match, currentUser, history, isTestStarted,
                       currentQuestion, questions, answeredQuestions,
                       setCurrentQuestion, addQuestions, addQuestionToAnsweredQuestions
                   }) => {
@@ -37,21 +39,27 @@ const TestHome = ({
         answers: []
     });
 
+    const cheating = () => {
+        cheatedCouter++;
+        if (cheatedCouter === 2) {
+            setIsTimerWorking(false);
+            setIsTestStarted(false);
+            history.push('/test/cheated');
+            cheatedCouter = 0;
+            window.removeEventListener('blur', cheating);
+            loadingBlur = false;
+            return;
+        }
+        toast.warn(<div>
+            <i className="fas fa-exclamation-circle"/>
+            При повторна излизане от страницата вашият тест ще бъде анулиран!
+        </div>);
+    };
 
     useEffect(() => {
         if (!loadingBlur) {
             loadingBlur = true;
-            window.addEventListener('blur', () => {
-                cheatedCouter++;
-                if (cheatedCouter === 2) {
-                    history.push('/test/cheated');
-                    return;
-                }
-                toast.warn(<div>
-                    <i className="fas fa-exclamation-circle"/>
-                    При повторна излизане от страницата вашият тест ще бъде анулиран!
-                </div>);
-            });
+            window.addEventListener('blur', cheating);
         }
         if (!isLoaded) {
             setLoaded(true);
@@ -142,7 +150,6 @@ const TestHome = ({
             if (currEl.questionId === currQuestions[index].id) {
                 if (currQuestions[index].type === 'choosable') {
                     let optionIndex = currQuestions[index].options.indexOf(currEl.content);
-                    console.log(currEl.content + " ** " + optionIndex);
                     setActiveOption(optionIndex);
                 }
                 else {
@@ -199,7 +206,6 @@ const TestHome = ({
                     {currQuestions && displayQuestionNav()}
                 </div>
                 <Timer time={timeLeft} timeIsOver={timeIsOver}/>
-                {cheatedCouter}
             </div>
             <div className='col-md-12 row bg-gray-light border-primary-all-but-top pl-0 pt-3 pb-3 pr-3 mx-auto'>
                 <div className='col-md-10 z-index-10 mx-auto mb-4'>
@@ -226,8 +232,13 @@ const TestHome = ({
 const mapStateToProps = (state) => ({
     currentUser: state.user.currentUser,
     currentQuestion: state.test.currentQuestion,
+    isTestStarted: state.test.isTestStarted,
     questions: state.test.questions,
     answeredQuestions: state.test.answeredQuestions
 });
 
-export default connect(mapStateToProps, {setCurrentQuestion, addQuestions, addQuestionToAnsweredQuestions})(TestHome);
+export default connect(mapStateToProps,
+    {
+        setCurrentQuestion, addQuestions, addQuestionToAnsweredQuestions,
+        setIsTimerWorking, setIsTestStarted
+    })(TestHome);

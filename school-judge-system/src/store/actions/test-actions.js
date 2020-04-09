@@ -26,3 +26,22 @@ export const addQuestionToAnsweredQuestions = (question) => {
         }
     }
 };
+
+export const setIsTimerWorking = (isTimerWorking) => {
+    return {
+        type: actionTypes.CHANGE_TIMER_WORKING,
+        payload: {
+            isTimerWorking: isTimerWorking
+        }
+    }
+};
+
+export const setIsTestStarted = (isTestStarted) => {
+    console.log(isTestStarted);
+    return {
+        type: actionTypes.SET_TEST_STARTED,
+        payload: {
+            isTestStarted: isTestStarted
+        }
+    }
+};

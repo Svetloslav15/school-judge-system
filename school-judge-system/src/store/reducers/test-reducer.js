@@ -3,7 +3,9 @@ import * as actionTypes from '../actions/action-types';
 const INITIAL_STATE = {
     questions: [],
     currentQuestion: 0,
-    answeredQuestions: []
+    answeredQuestions: [],
+    isTimerWorking: true,
+    isTestStarted: false
 };
 
 const testReducer = (state = INITIAL_STATE, action) => {
@@ -24,6 +26,19 @@ const testReducer = (state = INITIAL_STATE, action) => {
                 ...state,
                 answeredQuestions: Array.from(new Set(state.answeredQuestions.concat(action.payload.question)))
             };
+        }
+        case actionTypes.CHANGE_TIMER_WORKING: {
+            return {
+                ...state,
+                isTimerWorking: action.payload.isTimerWorking
+            }
+        }
+        case actionTypes.SET_TEST_STARTED: {
+            console.log(action.payload.isTestStarted);
+            return {
+                ...state,
+                isTestStarted: action.payload.isTestStarted
+            }
         }
         default :
             return state;
