@@ -62,12 +62,12 @@ const TestHome = ({
 
     const changeQuestion = () => {
         let isAnswered = false;
-        if (activeOption || openAnswerInput) {
+        if (activeOption || openAnswerInput || activeOption === 0) {
             let answer = {
                 points: 0,
                 note: '',
                 questionId: currentQuestion.id,
-                content: activeOption ? currentQuestion.options[activeOption] : openAnswerInput
+                content: activeOption || activeOption === 0 ? currentQuestion.options[activeOption] : openAnswerInput
             };
             isAnswered = true;
             setSubmition({...submition, answers: submition.answers.concat(answer)});
@@ -125,6 +125,7 @@ const TestHome = ({
             if (currEl.questionId === currQuestions[index].id) {
                 if (currQuestions[index].type === 'choosable') {
                     let optionIndex = currQuestions[index].options.indexOf(currEl.content);
+                    console.log(currEl.content + " ** " + optionIndex);
                     setActiveOption(optionIndex);
                 }
                 else {
@@ -162,6 +163,7 @@ const TestHome = ({
             if (currentQuestion.type === 'choosable') {
                 let result = [];
                 for (let index = 0; index < currentQuestion.options.length; index++) {
+                    console.log(activeOption);
                     result.push(<AnswerOption key={index}
                                               value={currentQuestion.options[index]}
                                               index={index}
