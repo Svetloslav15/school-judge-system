@@ -19,6 +19,7 @@ import MyTests from './components/admin/my-tests/MyTests';
 import AddTest from './components/admin/add-test/AddTest';
 import TestHome from './components/test/test-home/TestHome';
 import FinishTest from './components/test/test-home/FinishTest';
+import CheatedTest from "./components/test/test-home/CheatedTest";
 const store = createStore(rootReducer);
 
 const Root = (props) => {
@@ -45,6 +46,7 @@ const Root = (props) => {
                 <Route exact path="/register" component={Register}/>
                 <Route exact path="/test/home/:id" component={TestHome}/>
                 <Route exact path="/test/finish" component={FinishTest}/>
+                <Route exact path="/test/cheated" component={CheatedTest}/>
                 <Route exact path="/admin/tests/add" component={AddTest}/>
                 <Route exact path="/admin/tests/mine" component={MyTests}/>
             </Switch>

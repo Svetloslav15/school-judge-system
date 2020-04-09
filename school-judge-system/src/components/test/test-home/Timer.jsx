@@ -19,6 +19,7 @@ const Timer = ({time, timeIsOver}) => {
                     clearInterval(interval);
                     timeIsOver();
                 }
+                console.log(timeLeft);
                 setTime(timeLeft--);
             }, 1000);
         }

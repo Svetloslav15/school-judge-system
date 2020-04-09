@@ -12,6 +12,8 @@ import submitionService from '../../../services/submition-service';
 import {setCurrentQuestion, addQuestions, addQuestionToAnsweredQuestions} from '../../../store/actions/test-actions';
 import Timer from './Timer';
 import idGenerator from '../../../utils/id-generator';
+let cheatedCouter = 0;
+let loadingBlur = false;
 
 const TestHome = ({
                       id, match, currentUser, history,
@@ -35,7 +37,22 @@ const TestHome = ({
         answers: []
     });
 
+
     useEffect(() => {
+        if (!loadingBlur) {
+            loadingBlur = true;
+            window.addEventListener('blur', () => {
+                cheatedCouter++;
+                if (cheatedCouter === 2) {
+                    history.push('/test/cheated');
+                    return;
+                }
+                toast.warn(<div>
+                    <i className="fas fa-exclamation-circle"/>
+                    При повторна излизане от страницата вашият тест ще бъде анулиран!
+                </div>);
+            });
+        }
         if (!isLoaded) {
             setLoaded(true);
             const testId = match.params.id;
@@ -85,10 +102,10 @@ const TestHome = ({
                 return;
             }
             if (answeredQuestions.length < currQuestions.length) {
-                toast.warning(<div>
+                toast.warn(<div>
                     <i className="fas fa-exclamation-circle"/>
                     Имате въпрос, на който не сте отговорили!
-                </div>)
+                </div>);
             }
             else {
                 submitionService.createSubmition(submition);
@@ -163,7 +180,6 @@ const TestHome = ({
             if (currentQuestion.type === 'choosable') {
                 let result = [];
                 for (let index = 0; index < currentQuestion.options.length; index++) {
-                    console.log(activeOption);
                     result.push(<AnswerOption key={index}
                                               value={currentQuestion.options[index]}
                                               index={index}
@@ -183,6 +199,7 @@ const TestHome = ({
                     {currQuestions && displayQuestionNav()}
                 </div>
                 <Timer time={timeLeft} timeIsOver={timeIsOver}/>
+                {cheatedCouter}
             </div>
             <div className='col-md-12 row bg-gray-light border-primary-all-but-top pl-0 pt-3 pb-3 pr-3 mx-auto'>
                 <div className='col-md-10 z-index-10 mx-auto mb-4'>
