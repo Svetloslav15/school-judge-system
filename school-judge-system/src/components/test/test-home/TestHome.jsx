@@ -8,7 +8,7 @@ import {setCurrentQuestion, addQuestions, addQuestionToAnsweredQuestions} from '
 import Timer from "./Timer";
 
 const TestHome = ({
-                      id, match,
+                      id, match, currentUser,
                       currentQuestion, questions, answeredQuestions,
                       setCurrentQuestion, addQuestions, addQuestionToAnsweredQuestions
                   }) => {
@@ -17,8 +17,16 @@ const TestHome = ({
     const [currQuestions, setQuestions] = useState([]);
     let [timeLeft, setTimeLeft] = useState(null);
     const [activeOption, setActiveOption] = useState(null);
+    const [openAnswerInput, setAnswerInput] = useState('');
     const [isLoaded, setLoaded] = useState(false);
     const [optionsToDisplay, setOptionsToDisplay] = useState([]);
+    const [submition, setSubmition] = useState({
+        points: 0,
+        date: new Date(),
+        userId: currentUser.uid,
+        status: 'В момента се решава',
+        answers: []
+    });
 
     useEffect(() => {
         if (!isLoaded) {
@@ -27,12 +35,13 @@ const TestHome = ({
             handleData(testId);
         }
         displayOptions();
-    }, [activeOption]);
+    }, [activeOption, currentQuestion]);
 
     const handleData = (testId) => {
         testService.getTestById(testId)
             .then(data => {
                 setTest(data);
+                setSubmition({...submition, testId: data.id});
                 setTimeLeft(+data.time * 60);
             });
 
@@ -45,13 +54,42 @@ const TestHome = ({
     };
 
     const changeQuestion = () => {
-        addQuestionToAnsweredQuestions(currentQuestion.id);
+        if (activeOption || openAnswerInput) {
+            let answer = {
+                points: 0,
+                note: '',
+                questionId: currentQuestion.id,
+                content: activeOption ? currentQuestion.options[activeOption] : openAnswerInput
+            };
+            setSubmition({...submition, answers: submition.answers.concat(answer)});
+            addQuestionToAnsweredQuestions(currentQuestion.id);
+        }
+        setActiveOption(null);
+        setAnswerInput(null);
         if (currentQuestionIndex + 1 >= currQuestions.length) {
             alert('Ти реши всички въпроси');
         }
         else {
             setCurrentQuestionIndex(currentQuestionIndex + 1);
             setCurrentQuestion(currQuestions[currentQuestionIndex + 1]);
+        }
+    };
+
+    const changeQuestionFromNav = (index) => {
+        setCurrentQuestionIndex(index);
+        setCurrentQuestion(currQuestions[index]);
+
+        for (let currIndex = submition.answers.length - 1; currIndex >= 0; currIndex--) {
+            let currEl = submition.answers[currIndex];
+            if (currEl.questionId === currQuestions[index].id) {
+                if (currQuestions[index].type === 'choosable') {
+                    let optionIndex = currQuestions[index].options.indexOf(currEl.content);
+                    setActiveOption(optionIndex);
+                }
+                else {
+                    setAnswerInput(currEl.content);
+                }
+            }
         }
     };
 
@@ -67,10 +105,12 @@ const TestHome = ({
         const result = [];
         for (let index = 0; index < currQuestions.length; index++) {
             if (answeredQuestions.filter(x => x === currQuestions[index].id).length === 0) {
-                result.push(<NumberQuestion key={index} type='red' value={index + 1}/>);
+                result.push(<NumberQuestion key={index} type='red' value={index + 1}
+                                            changeCurrentQuestion={changeQuestionFromNav}/>);
             }
             else {
-                result.push(<NumberQuestion key={index} type='green' value={index + 1}/>);
+                result.push(<NumberQuestion key={index} type='green' value={index + 1}
+                                            changeCurrentQuestion={changeQuestionFromNav}/>);
             }
         }
         return result;
@@ -91,9 +131,9 @@ const TestHome = ({
                 setOptionsToDisplay(result);
             }
         }
-
     };
 
+    console.log(submition);
     return (
         <div className='col-sm-10 col-md-10 bg-transparent mx-auto my-5'>
             <div className='col-md-12 border-primary row mx-auto'>
@@ -101,7 +141,6 @@ const TestHome = ({
                     {currQuestions && displayQuestionNav()}
                 </div>
                 <Timer time={timeLeft} timeIsOver={timeIsOver}/>
-                {activeOption}
             </div>
             <div className='col-md-12 row bg-gray-light border-primary-all-but-top pl-0 pt-3 pb-3 pr-3 mx-auto'>
                 <div className='col-md-10 z-index-10 mx-auto mb-4'>
@@ -111,7 +150,10 @@ const TestHome = ({
                 <div className='row col-md-10 mx-auto'>
                     {currentQuestion.type === 'choosable' ? (optionsToDisplay) :
                         (<div className="md-form col-md-10 mx-auto z-index-10 bg-white">
-                            <textarea id="answer-input" className="md-textarea form-control" rows="6"/>
+                            <textarea id="answer-input" className="md-textarea form-control" rows="6"
+                                      onChange={(event) => setAnswerInput(event.target.value)}
+                                      value={openAnswerInput}
+                            />
                             <label htmlFor="answer-input">Въведи отговор...</label>
                         </div>)}
                 </div>
@@ -123,6 +165,7 @@ const TestHome = ({
     )
 };
 const mapStateToProps = (state) => ({
+    currentUser: state.user.currentUser,
     currentQuestion: state.test.currentQuestion,
     questions: state.test.questions,
     answeredQuestions: state.test.answeredQuestions
