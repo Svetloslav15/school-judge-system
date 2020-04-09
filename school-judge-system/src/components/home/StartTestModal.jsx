@@ -1,5 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {withRouter} from 'react-router-dom';
+import {toast} from 'react-toastify';
+
 import testService from '../../services/test-service';
 
 const StartTestModal = ({children, id, history}) => {
@@ -24,6 +26,7 @@ const StartTestModal = ({children, id, history}) => {
                 return;
             }
             setPassword('');
+            toast.error(<div><i className="fas fa-times-circle mr-3"/>Грешна парола!</div>);
             setError('Грешна парола');
         }
     };

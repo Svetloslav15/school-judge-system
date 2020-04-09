@@ -1,11 +1,13 @@
 import React, {useState, useEffect} from 'react';
 import {connect} from 'react-redux';
+import {toast} from 'react-toastify';
+
 import NumberQuestion from './NumberQuestion';
 import AnswerOption from './AnswerOption';
 import testService from '../../../services/test-service';
 import questionService from '../../../services/question-service';
 import {setCurrentQuestion, addQuestions, addQuestionToAnsweredQuestions} from '../../../store/actions/test-actions';
-import Timer from "./Timer";
+import Timer from './Timer';
 
 const TestHome = ({
                       id, match, currentUser,
@@ -67,11 +69,31 @@ const TestHome = ({
         setActiveOption(null);
         setAnswerInput(null);
         if (currentQuestionIndex + 1 >= currQuestions.length) {
-            alert('Ти реши всички въпроси');
+            if (answeredQuestions.length < currQuestions.length) {
+                toast.warning(<div>
+                    <i className="fas fa-exclamation-circle"/>
+                    Имате въпрос, на който не сте отговорили!
+                </div>)
+            }
+            else {
+                toast.success(<div><i className="far fa-check-circle mr-3"/>Успешно изпратихте вашето решение!</div>);
+            }
         }
         else {
             setCurrentQuestionIndex(currentQuestionIndex + 1);
             setCurrentQuestion(currQuestions[currentQuestionIndex + 1]);
+            for (let currIndex = 0; currIndex <= submition.answers.length - 1; currIndex++) {
+                let currEl = submition.answers[currIndex];
+                if (currEl.questionId === currQuestions[currentQuestionIndex + 1].id) {
+                    if (currQuestions[currentQuestionIndex + 1].type === 'choosable') {
+                        let optionIndex = currQuestions[currentQuestionIndex + 1].options.indexOf(currEl.content);
+                        setActiveOption(optionIndex);
+                    }
+                    else {
+                        setAnswerInput(currEl.content);
+                    }
+                }
+            }
         }
     };
 
@@ -81,7 +103,7 @@ const TestHome = ({
         setActiveOption(null);
         setAnswerInput('');
 
-        for (let currIndex = submition.answers.length - 1; currIndex >= 0; currIndex--) {
+        for (let currIndex = 0; currIndex <= submition.answers.length - 1; currIndex++) {
             let currEl = submition.answers[currIndex];
             if (currEl.questionId === currQuestions[index].id) {
                 if (currQuestions[index].type === 'choosable') {
@@ -134,7 +156,7 @@ const TestHome = ({
             }
         }
     };
-    console.log(answeredQuestions);
+
     return (
         <div className='col-sm-10 col-md-10 bg-transparent mx-auto my-5'>
             <div className='col-md-12 border-primary row mx-auto'>

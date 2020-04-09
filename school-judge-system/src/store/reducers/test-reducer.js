@@ -22,7 +22,7 @@ const testReducer = (state = INITIAL_STATE, action) => {
         case actionTypes.ADD_QUESTION_TO_ANSWERED_QUESTIONS: {
             return {
                 ...state,
-                answeredQuestions: state.answeredQuestions.concat(action.payload.question)
+                answeredQuestions: Array.from(new Set(state.answeredQuestions.concat(action.payload.question)))
             };
         }
         default :
