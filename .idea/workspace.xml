@@ -2,11 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0dfcef68-3311-4182-8efe-bf0ad3e80bc2" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/school-judge-system/src/components/test/test-home/FinishTest.jsx" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/watcherTasks.xml" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/school-judge-system/src/components/home/StartTestModal.jsx" afterPath="$PROJECT_DIR$/school-judge-system/src/components/home/StartTestModal.jsx" />
+      <change beforePath="$PROJECT_DIR$/school-judge-system/src/App.css" afterPath="$PROJECT_DIR$/school-judge-system/src/App.css" />
+      <change beforePath="$PROJECT_DIR$/school-judge-system/src/components/test/test-home/FinishTest.jsx" afterPath="$PROJECT_DIR$/school-judge-system/src/components/test/test-home/FinishTest.jsx" />
       <change beforePath="$PROJECT_DIR$/school-judge-system/src/components/test/test-home/TestHome.jsx" afterPath="$PROJECT_DIR$/school-judge-system/src/components/test/test-home/TestHome.jsx" />
-      <change beforePath="$PROJECT_DIR$/school-judge-system/src/store/reducers/test-reducer.js" afterPath="$PROJECT_DIR$/school-judge-system/src/store/reducers/test-reducer.js" />
+      <change beforePath="$PROJECT_DIR$/school-judge-system/src/index.js" afterPath="$PROJECT_DIR$/school-judge-system/src/index.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -23,12 +25,22 @@
       <file leaf-file-name="TestHome.jsx" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/school-judge-system/src/components/test/test-home/TestHome.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="353">
-              <caret line="95" column="13" lean-forward="false" selection-start-line="95" selection-start-column="13" selection-end-line="95" selection-end-column="13" />
+            <state relative-caret-position="136">
+              <caret line="77" column="23" lean-forward="false" selection-start-line="77" selection-start-column="23" selection-end-line="77" selection-end-column="23" />
               <folding>
                 <element signature="e#0#49#0" expanded="true" />
-                <element signature="e#3397#3961#0" expanded="false" />
+                <element signature="e#3832#4396#0" expanded="false" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="App.css" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/school-judge-system/src/App.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="119">
+              <caret line="44" column="11" lean-forward="true" selection-start-line="44" selection-start-column="1" selection-end-line="44" selection-end-column="11" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -36,8 +48,20 @@
       <file leaf-file-name="FinishTest.jsx" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/school-judge-system/src/components/test/test-home/FinishTest.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <state relative-caret-position="68">
+              <caret line="4" column="59" lean-forward="false" selection-start-line="4" selection-start-column="59" selection-end-line="4" selection-end-column="59" />
+              <folding>
+                <element signature="e#0#26#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/school-judge-system/src/index.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="136">
+              <caret line="20" column="63" lean-forward="false" selection-start-line="20" selection-start-column="63" selection-end-line="20" selection-end-column="63" />
               <folding />
             </state>
           </provider>
@@ -48,7 +72,18 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="408">
               <caret line="24" column="111" lean-forward="false" selection-start-line="24" selection-start-column="111" selection-end-line="24" selection-end-column="111" />
-              <folding />
+              <folding>
+                <marker date="1586458460922" expanded="true" signature="79:151" ph="{...}" />
+                <marker date="1586458460922" expanded="true" signature="209:875" ph="{...}" />
+                <marker date="1586458460922" expanded="true" signature="236:873" ph="{...}" />
+                <marker date="1586458460922" expanded="true" signature="284:410" ph="..." />
+                <marker date="1586458460922" expanded="true" signature="304:409" ph="{&quot;currentQuestion&quot;: action.payload.currentQuestion...}" />
+                <marker date="1586458460922" expanded="true" signature="450:576" ph="..." />
+                <marker date="1586458460922" expanded="true" signature="472:565" ph="{&quot;questions&quot;: action.payload.questions...}" />
+                <marker date="1586458460922" expanded="true" signature="637:823" ph="..." />
+                <marker date="1586458460922" expanded="true" signature="659:812" ph="{...}" />
+                <marker date="1586458460922" expanded="true" signature="841:867" ph="..." />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -56,7 +91,7 @@
       <file leaf-file-name="StartTestModal.jsx" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/school-judge-system/src/components/home/StartTestModal.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="221">
+            <state relative-caret-position="272">
               <caret line="28" column="0" lean-forward="false" selection-start-line="28" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
               <folding>
                 <element signature="e#0#49#0" expanded="true" />
@@ -67,18 +102,25 @@
       </file>
     </leaf>
   </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>box</find>
+    </findStrings>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/school-judge-system/src/App.css" />
         <option value="$PROJECT_DIR$/school-judge-system/src/components/test/test-home/AnswerOption.jsx" />
         <option value="$PROJECT_DIR$/school-judge-system/src/components/test/test-home/NumberQuestion.jsx" />
         <option value="$PROJECT_DIR$/school-judge-system/src/components/home/StartTestModal.jsx" />
         <option value="$PROJECT_DIR$/school-judge-system/src/store/reducers/test-reducer.js" />
+        <option value="$PROJECT_DIR$/school-judge-system/src/index.js" />
+        <option value="$PROJECT_DIR$/school-judge-system/src/App.css" />
         <option value="$PROJECT_DIR$/school-judge-system/src/components/test/test-home/TestHome.jsx" />
+        <option value="$PROJECT_DIR$/school-judge-system/src/components/test/test-home/FinishTest.jsx" />
       </list>
     </option>
   </component>
@@ -262,12 +304,12 @@
       <option name="presentableId" value="Default" />
       <updated>1586351257611</updated>
       <workItem from="1586351291601" duration="734000" />
-      <workItem from="1586417436705" duration="12544000" />
+      <workItem from="1586417436705" duration="13495000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="13278000" />
+    <option name="totallyTimeSpent" value="14229000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -310,14 +352,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/school-judge-system/src/App.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="308">
-          <caret line="204" column="1" lean-forward="false" selection-start-line="204" selection-start-column="1" selection-end-line="204" selection-end-column="15" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/school-judge-system/src/store/reducers/user-reducer.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="121">
@@ -395,13 +429,51 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="408">
           <caret line="24" column="111" lean-forward="false" selection-start-line="24" selection-start-column="111" selection-end-line="24" selection-end-column="111" />
+          <folding>
+            <marker date="1586458460922" expanded="true" signature="79:151" ph="{...}" />
+            <marker date="1586458460922" expanded="true" signature="209:875" ph="{...}" />
+            <marker date="1586458460922" expanded="true" signature="236:873" ph="{...}" />
+            <marker date="1586458460922" expanded="true" signature="284:410" ph="..." />
+            <marker date="1586458460922" expanded="true" signature="304:409" ph="{&quot;currentQuestion&quot;: action.payload.currentQuestion...}" />
+            <marker date="1586458460922" expanded="true" signature="450:576" ph="..." />
+            <marker date="1586458460922" expanded="true" signature="472:565" ph="{&quot;questions&quot;: action.payload.questions...}" />
+            <marker date="1586458460922" expanded="true" signature="637:823" ph="..." />
+            <marker date="1586458460922" expanded="true" signature="659:812" ph="{...}" />
+            <marker date="1586458460922" expanded="true" signature="841:867" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/school-judge-system/src/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="20" column="63" lean-forward="false" selection-start-line="20" selection-start-column="63" selection-end-line="20" selection-end-column="63" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/school-judge-system/src/components/test/test-home/TestHome.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="77" column="23" lean-forward="false" selection-start-line="77" selection-start-column="23" selection-end-line="77" selection-end-column="23" />
+          <folding>
+            <element signature="e#0#49#0" expanded="true" />
+            <element signature="e#3832#4396#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/school-judge-system/src/App.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="44" column="11" lean-forward="true" selection-start-line="44" selection-start-column="1" selection-end-line="44" selection-end-column="11" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/school-judge-system/src/components/home/StartTestModal.jsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
+        <state relative-caret-position="272">
           <caret line="28" column="0" lean-forward="false" selection-start-line="28" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
           <folding>
             <element signature="e#0#49#0" expanded="true" />
@@ -409,22 +481,13 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/school-judge-system/src/components/test/test-home/TestHome.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="353">
-          <caret line="95" column="13" lean-forward="false" selection-start-line="95" selection-start-column="13" selection-end-line="95" selection-end-column="13" />
-          <folding>
-            <element signature="e#0#49#0" expanded="true" />
-            <element signature="e#3397#3961#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/school-judge-system/src/components/test/test-home/FinishTest.jsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+        <state relative-caret-position="68">
+          <caret line="4" column="59" lean-forward="false" selection-start-line="4" selection-start-column="59" selection-end-line="4" selection-end-column="59" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

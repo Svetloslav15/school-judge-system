@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {connect} from 'react-redux';
 import {toast} from 'react-toastify';
+import {withRouter} from 'react-router-dom';
 
 import NumberQuestion from './NumberQuestion';
 import AnswerOption from './AnswerOption';
@@ -10,7 +11,7 @@ import {setCurrentQuestion, addQuestions, addQuestionToAnsweredQuestions} from '
 import Timer from './Timer';
 
 const TestHome = ({
-                      id, match, currentUser,
+                      id, match, currentUser, history,
                       currentQuestion, questions, answeredQuestions,
                       setCurrentQuestion, addQuestions, addQuestionToAnsweredQuestions
                   }) => {
@@ -56,6 +57,7 @@ const TestHome = ({
     };
 
     const changeQuestion = () => {
+        let isAnswered = false;
         if (activeOption || openAnswerInput) {
             let answer = {
                 points: 0,
@@ -63,12 +65,18 @@ const TestHome = ({
                 questionId: currentQuestion.id,
                 content: activeOption ? currentQuestion.options[activeOption] : openAnswerInput
             };
+            isAnswered = true;
             setSubmition({...submition, answers: submition.answers.concat(answer)});
             addQuestionToAnsweredQuestions(currentQuestion.id);
         }
         setActiveOption(null);
         setAnswerInput(null);
         if (currentQuestionIndex + 1 >= currQuestions.length) {
+            if (currentQuestionIndex === currQuestions.length - 1) {
+                toast.success(<div><i className="far fa-check-circle mr-3"/>Успешно изпратихте вашето решение!</div>);
+                history.push('/test/finish');
+                return;
+            }
             if (answeredQuestions.length < currQuestions.length) {
                 toast.warning(<div>
                     <i className="fas fa-exclamation-circle"/>
@@ -77,6 +85,7 @@ const TestHome = ({
             }
             else {
                 toast.success(<div><i className="far fa-check-circle mr-3"/>Успешно изпратихте вашето решение!</div>);
+                history.push('/test/finish');
             }
         }
         else {

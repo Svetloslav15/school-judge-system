@@ -205,3 +205,7 @@ html, body, .app {
 .cursor-pointer {
     cursor: pointer;
 }
+
+.f-size-15em {
+    font-size: 15em;
+}
