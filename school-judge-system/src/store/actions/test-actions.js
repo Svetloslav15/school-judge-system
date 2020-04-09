@@ -35,13 +35,3 @@ export const setIsTimerWorking = (isTimerWorking) => {
         }
     }
 };
-
-export const setIsTestStarted = (isTestStarted) => {
-    console.log(isTestStarted);
-    return {
-        type: actionTypes.SET_TEST_STARTED,
-        payload: {
-            isTestStarted: isTestStarted
-        }
-    }
-};

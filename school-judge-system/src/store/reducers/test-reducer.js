@@ -33,13 +33,6 @@ const testReducer = (state = INITIAL_STATE, action) => {
                 isTimerWorking: action.payload.isTimerWorking
             }
         }
-        case actionTypes.SET_TEST_STARTED: {
-            console.log(action.payload.isTestStarted);
-            return {
-                ...state,
-                isTestStarted: action.payload.isTestStarted
-            }
-        }
         default :
             return state;
     }

@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import {connect} from 'react-redux';
 import {toast} from 'react-toastify';
 import {withRouter} from 'react-router-dom';
-import {setIsTimerWorking, setIsTestStarted} from '../../../store/actions/test-actions';
+import {setIsTimerWorking} from '../../../store/actions/test-actions';
 
 import NumberQuestion from './NumberQuestion';
 import AnswerOption from './AnswerOption';
@@ -232,7 +232,6 @@ const TestHome = ({
 const mapStateToProps = (state) => ({
     currentUser: state.user.currentUser,
     currentQuestion: state.test.currentQuestion,
-    isTestStarted: state.test.isTestStarted,
     questions: state.test.questions,
     answeredQuestions: state.test.answeredQuestions
 });
@@ -240,5 +239,5 @@ const mapStateToProps = (state) => ({
 export default connect(mapStateToProps,
     {
         setCurrentQuestion, addQuestions, addQuestionToAnsweredQuestions,
-        setIsTimerWorking, setIsTestStarted
+        setIsTimerWorking
     })(TestHome);
