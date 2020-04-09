@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0dfcef68-3311-4182-8efe-bf0ad3e80bc2" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/school-judge-system/src/components/test/test-home/NumberQuestion.jsx" afterPath="$PROJECT_DIR$/school-judge-system/src/components/test/test-home/NumberQuestion.jsx" />
       <change beforePath="$PROJECT_DIR$/school-judge-system/src/components/test/test-home/TestHome.jsx" afterPath="$PROJECT_DIR$/school-judge-system/src/components/test/test-home/TestHome.jsx" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -22,8 +20,8 @@
       <file leaf-file-name="TestHome.jsx" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/school-judge-system/src/components/test/test-home/TestHome.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="82" column="33" lean-forward="true" selection-start-line="82" selection-start-column="33" selection-end-line="82" selection-end-column="33" />
+            <state relative-caret-position="39">
+              <caret line="76" column="4" lean-forward="false" selection-start-line="76" selection-start-column="4" selection-end-line="76" selection-end-column="4" />
               <folding>
                 <element signature="e#0#49#0" expanded="true" />
               </folding>
@@ -238,12 +236,12 @@
       <option name="presentableId" value="Default" />
       <updated>1586351257611</updated>
       <workItem from="1586351291601" duration="734000" />
-      <workItem from="1586417436705" duration="8613000" />
+      <workItem from="1586417436705" duration="10402000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="9347000" />
+    <option name="totallyTimeSpent" value="11136000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -361,8 +359,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/school-judge-system/src/components/test/test-home/TestHome.jsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="82" column="33" lean-forward="true" selection-start-line="82" selection-start-column="33" selection-end-line="82" selection-end-column="33" />
+        <state relative-caret-position="39">
+          <caret line="76" column="4" lean-forward="false" selection-start-line="76" selection-start-column="4" selection-end-line="76" selection-end-column="4" />
           <folding>
             <element signature="e#0#49#0" expanded="true" />
           </folding>

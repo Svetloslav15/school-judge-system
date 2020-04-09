@@ -78,6 +78,8 @@ const TestHome = ({
     const changeQuestionFromNav = (index) => {
         setCurrentQuestionIndex(index);
         setCurrentQuestion(currQuestions[index]);
+        setActiveOption(null);
+        setAnswerInput('');
 
         for (let currIndex = submition.answers.length - 1; currIndex >= 0; currIndex--) {
             let currEl = submition.answers[currIndex];
@@ -132,8 +134,7 @@ const TestHome = ({
             }
         }
     };
-
-    console.log(submition);
+    console.log(answeredQuestions);
     return (
         <div className='col-sm-10 col-md-10 bg-transparent mx-auto my-5'>
             <div className='col-md-12 border-primary row mx-auto'>
