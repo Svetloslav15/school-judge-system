@@ -43,7 +43,6 @@ const TestHome = ({
         cheatedCouter++;
         if (cheatedCouter === 2) {
             setIsTimerWorking(false);
-            setIsTestStarted(false);
             history.push('/test/cheated');
             cheatedCouter = 0;
             window.removeEventListener('blur', cheating);
