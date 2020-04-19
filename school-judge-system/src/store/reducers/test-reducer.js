@@ -5,7 +5,6 @@ const INITIAL_STATE = {
     currentQuestion: 0,
     answeredQuestions: [],
     isTimerWorking: true,
-    isTestStarted: false
 };
 
 const testReducer = (state = INITIAL_STATE, action) => {
