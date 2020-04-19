@@ -9,6 +9,7 @@ import AnswerOption from './AnswerOption';
 import testService from '../../../services/test-service';
 import questionService from '../../../services/question-service';
 import submitionService from '../../../services/submition-service';
+import userService from '../../../services/user-service';
 
 import {setCurrentQuestion, addQuestions, addQuestionToAnsweredQuestions} from '../../../store/actions/test-actions';
 import Timer from './Timer';
@@ -30,6 +31,7 @@ const TestHome = ({
     const [openAnswerInput, setAnswerInput] = useState('');
     const [isLoaded, setLoaded] = useState(false);
     const [optionsToDisplay, setOptionsToDisplay] = useState([]);
+    const [isUserSubmittedTest, setIsSubmittedTest] = useState(false);
 
     const [submition, setSubmition] = useState({
         points: 0,
@@ -41,6 +43,13 @@ const TestHome = ({
     });
 
     useEffect(() => {
+        if (isUserSubmittedTest) {
+            toast.warn(<div>
+                <i className="fas fa-exclamation-circle mr-2"/>
+                Вече сте решавали този тест.
+            </div>);
+            history.push('/');
+        }
         if (!loadingBlur) {
             loadingBlur = true;
             window.addEventListener('blur', cheating);
@@ -52,7 +61,7 @@ const TestHome = ({
             handleData(testId);
         }
         displayOptions();
-    }, [activeOption, currentQuestion]);
+    }, [activeOption, currentQuestion, isUserSubmittedTest]);
 
     const cheating = () => {
         if (localStorage.getItem('token-s') === 'true') {
@@ -67,7 +76,7 @@ const TestHome = ({
                 return;
             }
             toast.warn(<div>
-                <i className="fas fa-exclamation-circle"/>
+                <i className="fas fa-exclamation-circle mr-2"/>
                 При повторна излизане от страницата вашият тест ще бъде анулиран!
             </div>);
         }
@@ -78,6 +87,11 @@ const TestHome = ({
             .then(data => {
                 setTest(data);
                 setSubmition({...submition, testId: data.id});
+                userService.isUserSubmittedThisTest(currentUser.uid, data.id)
+                    .then((isUserSubmittedThisTest) => {
+                        console.log(isUserSubmittedThisTest);
+                        setIsSubmittedTest(isUserSubmittedThisTest);
+                    });
                 setTimeLeft(+data.time * 60);
             });
 
