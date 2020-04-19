@@ -1,5 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {connect} from 'react-redux';
+import {withRouter} from 'react-router-dom';
+
 import Navigation from '../../common/navigation/Navigation';
 import testService from '../../../services/test-service';
 
@@ -35,6 +37,10 @@ const MyTests = (props) => {
             })
     };
 
+    const changeUrl = (url) => {
+        props.history.push(url);
+    };
+
     const displayTests = (tests) => (
         tests.map((x, i) => (<li key={i} className="d-flex list-group-item col-md-12 row">
             <p className="col-md-6 p">{x.name}</p>
@@ -44,11 +50,13 @@ const MyTests = (props) => {
             <div className="col-md-4 mx-auto row">
                 {
                     x.status === 'active' ?
-                        <button onClick={() => toggleTestStatus(x.id)} className="btn p-2 button-size-42 btn-outline-danger btn-md" data-toggle="tooltip"
+                        <button onClick={() => toggleTestStatus(x.id)}
+                                className="btn p-2 button-size-42 btn-outline-danger btn-md" data-toggle="tooltip"
                                 data-placement="top" title="Архивирай теста">
                             <i className="fas fa-archive fa-lg"/>
                         </button> :
-                        <button onClick={() => toggleTestStatus(x.id)} className="btn p-2 button-size-42 btn-success btn-md" data-toggle="tooltip"
+                        <button onClick={() => toggleTestStatus(x.id)}
+                                className="btn p-2 button-size-42 btn-success btn-md" data-toggle="tooltip"
                                 data-placement="top" title="Направи теста активен">
                             <i className="fas fa-calendar-plus fa-lg"/>
                         </button>
@@ -62,9 +70,9 @@ const MyTests = (props) => {
                         data-placement="top" title="Изтрий теста">
                     <i className="fas fa-trash-alt fa-lg"/>
                 </button>
-                <button className="btn p-2 button-size-42 btn-primary btn-md" data-toggle="tooltip"
-                        data-placement="top" title="Виж резултати">
-                    <i className="fas fa-chart-pie fa-md"/>
+                <button onClick={() => changeUrl('/test/results/' + x.id)}
+                        className="btn p-2 btn-primary btn-md">
+                   Виж резултати
                 </button>
             </div>
         </li>))

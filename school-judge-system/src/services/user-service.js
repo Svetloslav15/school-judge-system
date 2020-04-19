@@ -15,5 +15,17 @@ export default {
             }
         }
         return false;
+    },
+    findUserById: async (currUserId) => {
+        let snapshot = await usersRef.once('value');
+        let userObject = snapshot.val();
+        if (userObject) {
+            for (let userId of Object.keys(userObject)) {
+                if (userId === currUserId) {
+                    return userObject[userId];
+                }
+            }
+        }
+        return null;
     }
 }
