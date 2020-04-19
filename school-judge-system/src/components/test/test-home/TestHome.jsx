@@ -33,7 +33,7 @@ const TestHome = ({
     const [isFinished, setFinished] = useState(false);
     const [isTimerWorking, setIsTimerWorking] = useState(false);
 
-    const [submition, setSubmition] = useState({
+    let [submition, setSubmition] = useState({
         points: 0,
         id: idGenerator(),
         date: new Date(),
@@ -71,11 +71,13 @@ const TestHome = ({
 
     const cheating = () => {
         if (localStorage.getItem('token-s') === 'true') {
-            console.log(cheatedCouter);
             cheatedCouter++;
             if (cheatedCouter === 2) {
                 setIsTimerWorking(false);
                 localStorage.setItem('token-s', 'false');
+                submition.status = 'Преписвал';
+                submition.testId = match.params.id;
+                submitionService.createSubmition(submition);
                 history.push('/test/cheated');
                 window.removeEventListener('blur', cheating);
                 loadingBlur = false;
