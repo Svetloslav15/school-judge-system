@@ -8,10 +8,11 @@ const $ = window.$;
 const MyTests = (props) => {
     const [loading, setLoading] = useState(true);
     const [tests, setTests] = useState([]);
+    const [change, setChange] = useState(0);
 
     useEffect(() => {
         getTestsFotThisUser();
-    }, []);
+    }, [change]);
 
     const getTestsFotThisUser = () => {
         testService.getTests()
@@ -27,6 +28,13 @@ const MyTests = (props) => {
             });
     };
 
+    const toggleTestStatus = (id) => {
+        testService.toggleTestStatus(id)
+            .then(() => {
+                setChange(change + 1);
+            })
+    };
+
     const displayTests = (tests) => (
         tests.map((x, i) => (<li key={i} className="d-flex list-group-item col-md-12 row">
             <p className="col-md-6 p">{x.name}</p>
@@ -36,11 +44,11 @@ const MyTests = (props) => {
             <div className="col-md-4 mx-auto row">
                 {
                     x.status === 'active' ?
-                        <button className="btn p-2 button-size-42 btn-outline-danger btn-md" data-toggle="tooltip"
+                        <button onClick={() => toggleTestStatus(x.id)} className="btn p-2 button-size-42 btn-outline-danger btn-md" data-toggle="tooltip"
                                 data-placement="top" title="Архивирай теста">
                             <i className="fas fa-archive fa-lg"/>
                         </button> :
-                        <button className="btn p-2 button-size-42 btn-success btn-md" data-toggle="tooltip"
+                        <button onClick={() => toggleTestStatus(x.id)} className="btn p-2 button-size-42 btn-success btn-md" data-toggle="tooltip"
                                 data-placement="top" title="Направи теста активен">
                             <i className="fas fa-calendar-plus fa-lg"/>
                         </button>

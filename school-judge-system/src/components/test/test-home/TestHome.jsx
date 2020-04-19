@@ -2,7 +2,6 @@ import React, {useState, useEffect} from 'react';
 import {connect} from 'react-redux';
 import {toast} from 'react-toastify';
 import {withRouter} from 'react-router-dom';
-import {setIsTimerWorking} from '../../../store/actions/test-actions';
 
 import NumberQuestion from './NumberQuestion';
 import AnswerOption from './AnswerOption';
@@ -24,7 +23,6 @@ const TestHome = ({
                       setCurrentQuestion, addQuestions, addQuestionToAnsweredQuestions,
                   }) => {
     let [timeLeft, setTimeLeft] = useState(null);
-    const [test, setTest] = useState('');
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
     const [currQuestions, setQuestions] = useState([]);
     const [activeOption, setActiveOption] = useState(null);
@@ -32,6 +30,8 @@ const TestHome = ({
     const [isLoaded, setLoaded] = useState(false);
     const [optionsToDisplay, setOptionsToDisplay] = useState([]);
     const [isUserSubmittedTest, setIsSubmittedTest] = useState(false);
+    const [isFinished, setFinished] = useState(false);
+    const [isTimerWorking, setIsTimerWorking] = useState(false);
 
     const [submition, setSubmition] = useState({
         points: 0,
@@ -49,13 +49,19 @@ const TestHome = ({
                 Вече сте решавали този тест.
             </div>);
             history.push('/');
+            return;
+        }
+        if (submition.answers.length === currQuestions.length && submition.answers.length !== 0) {
+            setFinished(true);
         }
         if (!loadingBlur) {
             loadingBlur = true;
+            cheatedCouter = 0;
             window.addEventListener('blur', cheating);
         }
         if (!isLoaded) {
             localStorage.setItem('token-s', 'true');
+            setIsTimerWorking(true);
             setLoaded(true);
             const testId = match.params.id;
             handleData(testId);
@@ -65,14 +71,15 @@ const TestHome = ({
 
     const cheating = () => {
         if (localStorage.getItem('token-s') === 'true') {
+            console.log(cheatedCouter);
             cheatedCouter++;
             if (cheatedCouter === 2) {
                 setIsTimerWorking(false);
                 localStorage.setItem('token-s', 'false');
                 history.push('/test/cheated');
-                cheatedCouter = 0;
                 window.removeEventListener('blur', cheating);
                 loadingBlur = false;
+                cheatedCouter = 0;
                 return;
             }
             toast.warn(<div>
@@ -85,11 +92,9 @@ const TestHome = ({
     const handleData = (testId) => {
         testService.getTestById(testId)
             .then(data => {
-                setTest(data);
                 setSubmition({...submition, testId: data.id});
                 userService.isUserSubmittedThisTest(currentUser.uid, data.id)
                     .then((isUserSubmittedThisTest) => {
-                        console.log(isUserSubmittedThisTest);
                         setIsSubmittedTest(isUserSubmittedThisTest);
                     });
                 setTimeLeft(+data.time * 60);
@@ -125,19 +130,28 @@ const TestHome = ({
         return false;
     };
 
+    const submitTest = (redirectTo) => {
+        setFinished(true);
+        localStorage.setItem('token-s', 'false');
+        localStorage.setItem('timer-stop', 'true');
+        cheatedCouter = 0;
+        loadingBlur = false;
+        window.removeEventListener('blur', cheating);
+        submitionService.createSubmition(submition);
+        setIsTimerWorking(false);
+        setIsSubmittedTest(true);
+        history.push(redirectTo);
+    };
+
     const changeQuestion = () => {
         const isAnswered = createSubmission();
-
         if (currentQuestionIndex + 1 >= currQuestions.length) {
             if (currentQuestionIndex === currQuestions.length - 1 &&
                 isAnswered &&
-                answeredQuestions.length + 1 >= currQuestions.length) {
-                localStorage.setItem('token-s', 'false');
-                cheatedCouter = 0;
-                window.removeEventListener('blur', cheating);
-                submitionService.createSubmition(submition);
+                answeredQuestions.length + 1 >= currQuestions.length &&
+                submition.answers.length === currQuestions.length) {
                 toast.success(<div><i className="far fa-check-circle mr-3"/>Успешно изпратихте вашето решение!</div>);
-                history.push('/test/finish');
+                submitTest('/test/finish');
             }
             else {
                 toast.warn(<div>
@@ -148,6 +162,12 @@ const TestHome = ({
         }
         else {
             changeQuestionFromNav(currentQuestionIndex + 1);
+        }
+    };
+
+    const timeIsOver = () => {
+        if (!isFinished) {
+            submitTest('/test/timerover');
         }
     };
 
@@ -169,10 +189,6 @@ const TestHome = ({
                 }
             }
         }
-    };
-
-    const timeIsOver = () => {
-        alert('Времето свърши!');
     };
 
     const changeActiveOption = (index) => {
@@ -210,13 +226,14 @@ const TestHome = ({
             }
         }
     };
+
     return (
         <div className='col-sm-10 col-md-10 bg-transparent mx-auto my-5'>
             <div className='col-md-12 border-primary row mx-auto'>
                 <div className='col-md-7 row'>
                     {currQuestions && displayQuestionNav()}
                 </div>
-                <Timer time={timeLeft} timeIsOver={timeIsOver}/>
+                <Timer time={timeLeft} isTimerWorking={isTimerWorking} timeIsOver={timeIsOver}/>
             </div>
             <div className='col-md-12 row bg-gray-light border-primary-all-but-top pl-0 pt-3 pb-3 pr-3 mx-auto'>
                 <div className='col-md-10 z-index-10 mx-auto mb-4'>
@@ -233,9 +250,14 @@ const TestHome = ({
                             <label htmlFor="answer-input">Въведи отговор...</label>
                         </div>)}
                 </div>
-                <button onClick={changeQuestion} className="btn btn-primary rounded z-index-10 mx-auto sm-mt-2">
-                    <i className="fas fa-arrow-circle-right"/>
-                </button>
+                {isFinished ? (
+                    <button onClick={submitTest('/test/finish')} className="btn btn-success rounded z-index-10 mx-auto sm-mt-2">
+                        Предай теста
+                    </button>) : (
+                    <button onClick={changeQuestion} className="btn btn-primary rounded z-index-10 mx-auto sm-mt-2">
+                        <i className="fas fa-arrow-circle-right"/>
+                    </button>)}
+
             </div>
         </div>
     )
@@ -245,11 +267,9 @@ const mapStateToProps = (state) => ({
     currentQuestion: state.test.currentQuestion,
     questions: state.test.questions,
     answeredQuestions: state.test.answeredQuestions,
-    isTestStarted: state.test.isTestStarted
 });
 
 export default connect(mapStateToProps,
     {
-        setCurrentQuestion, addQuestions, addQuestionToAnsweredQuestions,
-        setIsTimerWorking
+        setCurrentQuestion, addQuestions, addQuestionToAnsweredQuestions
     })(TestHome);

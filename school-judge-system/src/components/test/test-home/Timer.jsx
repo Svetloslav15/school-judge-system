@@ -1,12 +1,13 @@
 import React, {useState, useEffect} from 'react';
-import {connect} from 'react-redux';
 
 const Timer = ({time, timeIsOver, isTimerWorking}) => {
     let [timeLeft, setTime] = useState(null);
     let [isProcessed, setProcessed] = useState(false);
+    const [isWorking, setIsWorking] = useState(isTimerWorking);
     const [isLoading, setLoading] = useState(true);
 
     useEffect(() => {
+        setIsWorking(isTimerWorking);
         if (isLoading) {
             setTime(time);
         }
@@ -16,12 +17,14 @@ const Timer = ({time, timeIsOver, isTimerWorking}) => {
         if (!isLoading && !isProcessed) {
             setProcessed(true);
             let interval = setInterval(() => {
-                if (timeLeft - 1 <= 0) {
+                console.log(`${isTimerWorking} ${timeLeft}`);
+                if (timeLeft - 1 <= 0 || localStorage.getItem('timer-stop')) {
                     clearInterval(interval);
-                    timeIsOver();
-                }
-                if (!isTimerWorking) {
-                    clearInterval(interval);
+                    localStorage.removeItem('timer-stop');
+                    if (timeLeft - 1 <= 0) {
+                        timeIsOver();
+                    }
+                    return;
                 }
                 setTime(timeLeft--);
             }, 1000);
@@ -41,8 +44,5 @@ const Timer = ({time, timeIsOver, isTimerWorking}) => {
         </div>
     );
 };
-const mapStateToProps = (state) => ({
-    isTimerWorking: state.test.isTimerWorking
-});
 
-export default connect(mapStateToProps, null)(Timer);
+export default Timer;
