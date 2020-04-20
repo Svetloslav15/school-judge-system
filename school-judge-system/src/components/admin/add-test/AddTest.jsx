@@ -14,10 +14,18 @@ const AddTest = ({currentUser}) => {
     const [stepThreeDone, setStepThreeDone] = useState(false);
     const [firebaseRef, setFirebaseRef] = useState(firebase.database().ref());
     const [test, setTest] = useState({});
+    const [isGenerated, setIsGenerated] = useState(false);
+    const [done, setIsDone] = useState(false);
 
     useEffect(() => {
-        test.id = idGenerator();
-    }, []);
+        if (!isGenerated) {
+            test.id = idGenerator();
+            setIsGenerated(true);
+        }
+        if (isGenerated && done) {
+            submitTest();
+        }
+    }, [test]);
 
     const handleStepOneForm = (name, password, time) => {
         setStepOneDone(true);
@@ -41,7 +49,7 @@ const AddTest = ({currentUser}) => {
         });
         setStepThreeDone(true);
         setStep(1);
-        submitTest();
+        setIsDone(true);
     };
 
     const submitTest = () => {

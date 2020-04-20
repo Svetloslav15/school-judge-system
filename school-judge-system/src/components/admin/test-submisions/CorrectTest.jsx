@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {withRouter} from 'react-router-dom';
 import submitionService from '../../../services/submition-service';
+import testService from '../../../services/test-service';
 
 import Navigation from '../../common/navigation/Navigation';
 import NumberQuestion from '../../test/test-home/NumberQuestion';
@@ -23,7 +24,6 @@ const CorrectTest = ({history, match}) => {
                     setCurrentQuestion(data.answers[0].question);
                 })
         }
-        console.log(submition);
     }, [submition]);
 
     const checkIfAllQuestionsAreCorrected = () => {
@@ -51,10 +51,28 @@ const CorrectTest = ({history, match}) => {
         for (let answer of submition.answers) {
             delete answer.question;
         }
-        submitionService.updateSubmition(submition)
-            .then(() => {
-                history.push(`/test/results/${submition.testId}`);
-            })
+        testService.getTestById(submition.testId)
+            .then((test) => {
+                if (submition.points >= test.pointsForExcellent.min && submition.points <= test.pointsForExcellent.max) {
+                    submition.grade = 'Отличен (6)';
+                }
+                else if (submition.points >= test.pointsForVeryGood.min && submition.points <= test.pointsForVeryGood.max) {
+                    submition.grade = 'Много добър (5)';
+                }
+                else if (submition.points >= test.pointsForGood.min && submition.points <= test.pointsForGood.max) {
+                    submition.grade = 'Добър (4)';
+                }
+                else if (submition.points >= test.pointsForSatisfactory.min && submition.points <= test.pointsForSatisfactory.max) {
+                    submition.grade = 'Среден (3)';
+                }
+                else if (submition.points >= test.pointsForPoor.min && submition.points <= test.pointsForPoor.max) {
+                    submition.grade = 'Слаб (2)';
+                }
+                submitionService.updateSubmition(submition)
+                    .then(() => {
+                        history.push(`/test/results/${submition.testId}`);
+                    })
+            });
     };
 
     const changeQuestionFromNav = (index) => {
