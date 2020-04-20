@@ -48,6 +48,11 @@ const TestHome = ({
                 <i className="fas fa-exclamation-circle mr-2"/>
                 Вече сте решавали този тест.
             </div>);
+            localStorage.setItem('token-s', 'false');
+            localStorage.setItem('timer-stop', 'true');
+            cheatedCouter = 0;
+            loadingBlur = false;
+            window.removeEventListener('blur', cheating);
             history.push('/');
             return;
         }
@@ -59,8 +64,9 @@ const TestHome = ({
             cheatedCouter = 0;
             window.addEventListener('blur', cheating);
         }
-        if (!isLoaded) {
+        if (!isLoaded && !isUserSubmittedTest) {
             localStorage.setItem('token-s', 'true');
+            localStorage.removeItem('timer-stop');
             setIsTimerWorking(true);
             setLoaded(true);
             const testId = match.params.id;
@@ -75,6 +81,7 @@ const TestHome = ({
             if (cheatedCouter === 2) {
                 setIsTimerWorking(false);
                 localStorage.setItem('token-s', 'false');
+                localStorage.setItem('timer-stop', 'true');
                 submition.status = 'Преписвал';
                 submition.testId = match.params.id;
                 submitionService.createSubmition(submition);
@@ -133,16 +140,15 @@ const TestHome = ({
     };
 
     const submitTest = (redirectTo) => {
-        setFinished(true);
         localStorage.setItem('token-s', 'false');
         localStorage.setItem('timer-stop', 'true');
         cheatedCouter = 0;
         loadingBlur = false;
         window.removeEventListener('blur', cheating);
         submitionService.createSubmition(submition);
+        history.push(redirectTo);
         setIsTimerWorking(false);
         setIsSubmittedTest(true);
-        history.push(redirectTo);
     };
 
     const changeQuestion = () => {
@@ -168,9 +174,7 @@ const TestHome = ({
     };
 
     const timeIsOver = () => {
-        if (!isFinished) {
-            submitTest('/test/timerover');
-        }
+        submitTest('/test/timerover');
     };
 
     const changeQuestionFromNav = (index) => {

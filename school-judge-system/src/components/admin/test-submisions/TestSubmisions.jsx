@@ -21,7 +21,8 @@ const TestSubmisions = ({match}) => {
     const displayData = (data) => (
         data.map((submision, index) => (
             <li key={index} className="d-flex list-group-item col-md-12 row">
-                <p className="col-md-6 p">{submision.user.firstName} {submision.user.lastName}</p>
+                <p className="col-md-4 p">{submision.user.firstName} {submision.user.lastName}</p>
+                <p className="col-md-2 p">{submision.user.studentClass}</p>
                 <p className="col-md-4 p text-danger">{submision.status}</p>
                 <div className="col-md-2 mx-auto row">
                     <button className="btn p-2 button-size-42 btn-primary btn-md" data-toggle="tooltip"
@@ -43,7 +44,8 @@ const TestSubmisions = ({match}) => {
                     <div className="col-md-12 mx-auto mb-5">
                         <ul className="list-group list-group-flush col-md-11 mx-auto">
                             <li className="d-flex list-group-item col-md-12 row bg-primary text-white">
-                                <h5 className="col-md-6 h5 font-weight-semi-bold">Ученик</h5>
+                                <h5 className="col-md-4 h5 font-weight-semi-bold">Ученик</h5>
+                                <h5 className="col-md-2 h5 font-weight-semi-bold">Клас</h5>
                                 <h5 className="col-md-4 h5 font-weight-semi-bold">Статус</h5>
                                 <h5 className="col-md-2 h5">Действия</h5>
                             </li>

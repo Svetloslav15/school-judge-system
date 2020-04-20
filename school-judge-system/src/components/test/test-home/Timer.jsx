@@ -3,11 +3,9 @@ import React, {useState, useEffect} from 'react';
 const Timer = ({time, timeIsOver, isTimerWorking}) => {
     let [timeLeft, setTime] = useState(null);
     let [isProcessed, setProcessed] = useState(false);
-    const [isWorking, setIsWorking] = useState(isTimerWorking);
     const [isLoading, setLoading] = useState(true);
 
     useEffect(() => {
-        setIsWorking(isTimerWorking);
         if (isLoading) {
             setTime(time);
         }
@@ -19,11 +17,11 @@ const Timer = ({time, timeIsOver, isTimerWorking}) => {
             let interval = setInterval(() => {
                 console.log(`${isTimerWorking} ${timeLeft}`);
                 if (timeLeft - 1 <= 0 || localStorage.getItem('timer-stop')) {
-                    clearInterval(interval);
-                    localStorage.removeItem('timer-stop');
                     if (timeLeft - 1 <= 0) {
                         timeIsOver();
                     }
+                    clearInterval(interval);
+                    localStorage.removeItem('timer-stop');
                     return;
                 }
                 setTime(timeLeft--);
