@@ -57,5 +57,10 @@ export default {
             }
         }
         return null;
+    },
+    updateSubmition: async (submition) => {
+        firebase.database()
+            .ref('/submitions/' + submition.id)
+            .update(submition);
     }
 }
