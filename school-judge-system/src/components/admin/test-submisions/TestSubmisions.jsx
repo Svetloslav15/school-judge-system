@@ -1,6 +1,9 @@
 import React, {useState, useEffect} from 'react';
+import {Link} from 'react-router-dom';
+
 import submisionService from '../../../services/submition-service';
 import Navigation from '../../common/navigation/Navigation';
+
 const $ = window.$;
 
 const TestSubmisions = ({match}) => {
@@ -19,16 +22,17 @@ const TestSubmisions = ({match}) => {
     }, []);
 
     const displayData = (data) => (
-        data.map((submision, index) => (
+        data.map((submition, index) => (
             <li key={index} className="d-flex list-group-item col-md-12 row">
-                <p className="col-md-4 p">{submision.user.firstName} {submision.user.lastName}</p>
-                <p className="col-md-2 p">{submision.user.studentClass}</p>
-                <p className="col-md-4 p text-danger">{submision.status}</p>
+                <p className="col-md-4 p">{submition.user.firstName} {submition.user.lastName}</p>
+                <p className="col-md-2 p">{submition.user.studentClass}</p>
+                <p className="col-md-4 p text-danger">{submition.status}</p>
                 <div className="col-md-2 mx-auto row">
-                    <button className="btn p-2 button-size-42 btn-primary btn-md" data-toggle="tooltip"
-                            data-placement="top" title={"Виж резултата на " + submision.user.firstName}>
-                        <i className="fas fa-search fa-lg"/>
-                    </button>
+                    <Link to={'/test/submitions/' + submition.id}>
+                        <button className="btn p-2 btn-primary btn-md">
+                            Провери тест
+                        </button>
+                    </Link>
                 </div>
             </li>)
         )

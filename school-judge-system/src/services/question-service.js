@@ -15,5 +15,17 @@ export default {
             }
         }
         return questions;
+    },
+    findQuestionById: async (id) => {
+        let snapshot = await questionsRef.once('value');
+        let questionObject = snapshot.val();
+        if (questionObject) {
+            for (let question of Object.keys(questionObject)) {
+                if (question === id) {
+                    return questionObject[question];
+                }
+            }
+        }
+        return null;
     }
 }
