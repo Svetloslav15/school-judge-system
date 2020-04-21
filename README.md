@@ -1,3 +1,3 @@
 # School Judge
 
-System for testing students.
+Online system for testing students knowledge.
