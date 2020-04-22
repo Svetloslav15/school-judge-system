@@ -66,7 +66,7 @@ $ npm install
 
 ## Team
 
-| [![Svetloslav Novoselski](https://i.imgur.com/U4Ccsq7.png)](https://i.imgur.com/U4Ccsq7.png)
+[![Svetloslav Novoselski](https://i.imgur.com/U4Ccsq7.png)](https://i.imgur.com/U4Ccsq7.png)
 - Svetloslav Novoselski
 
 ---
