@@ -12,19 +12,9 @@
 - [Features](#features)
 - [Contributing](#contributing)
 - [Team](#team)
-- [FAQ](#faq)
-- [Support](#support)
 - [License](#license)
 
 ### Setup
-
-- 
-> update and install this package first
-
-```shell
-$ brew update
-$ brew install fvcproductions
-```
 
 > install yarn or npm packages
 
@@ -36,9 +26,21 @@ $ npm install
 ---
 
 ## Features
-## Usage (Optional)
+- Teacher
+-- Add new test
+-- Correct submitions
+-- Edit existing test
+-- Exporting results from test
+
+- Student
+-- Participate in a test
+-- View results from a particular test
+-- View results from all tests
+-- Export their results
+
+## Usage
 - The target group of the app are students and teachers from schools.
-## Documentation (Optional)
+## Documentation
 
 ## Contributing
 
@@ -64,11 +66,8 @@ $ npm install
 
 ## Team
 
-> Or Contributors/People
-
-| <a href="http://fvcproductions.com" target="_blank">**FVCproductions**</a> | <a href="http://fvcproductions.com" target="_blank">**FVCproductions**</a> | <a href="http://fvcproductions.com" target="_blank">**FVCproductions**</a> |
-| :---: |:---:| :---:|
 | [![Svetloslav Novoselski](https://i.imgur.com/U4Ccsq7.png)](https://i.imgur.com/U4Ccsq7.png)
+- Svetloslav Novoselski
 
 ---
 
