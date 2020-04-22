@@ -27,16 +27,16 @@ $ npm install
 
 ## Features
 - **Teacher**
-- Add new test
-- Correct submitions
-- Edit existing test
-- Exporting results from test
+    - Add new test
+    - Correct submitions
+    - Edit existing test
+    - Exporting results from test
 
 - **Student**
-- Participate in a test
-- View results from a particular test
-- View results from all tests
-- Export their results
+    - Participate in a test
+    - View results from a particular test
+    - View results from all tests
+    - Export their results
 
 ## Usage
 - The target group of the app are students and teachers from schools.
